@@ -224,12 +224,15 @@ export default function WordleChallenge({
         </div>
 
         <h1>
-          What is the Ojibwe word for:
-          <strong> {word.english}</strong>?
+          Guess the Ojibwe word
         </h1>
 
+        <div className="recall-hint">
+          Hint: {word.category === "Animals" ? "Animal" : word.category}
+        </div>
+
         <p className="wordle-hint">
-          No answer is shown before this recall attempt.
+          Use the hint and your memory to identify the word.
         </p>
 
         <div

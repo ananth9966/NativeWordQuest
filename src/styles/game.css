@@ -1468,3 +1468,17 @@ button:focus-visible {
     gap: 0.8rem;
   }
 }
+
+
+.recall-hint {
+  width: fit-content;
+  margin: 0.55rem auto 0.65rem;
+  padding: 0.65rem 1.1rem;
+  border: 3px solid #8c6a32;
+  border-radius: 14px;
+  color: #3f2f20;
+  background: linear-gradient(180deg, #f1dca6, #dabb78);
+  box-shadow: 0 4px 0 #6d4b25;
+  font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+  font-weight: 900;
+}
