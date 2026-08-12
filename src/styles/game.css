@@ -1434,3 +1434,37 @@ button:focus-visible {
     font-size: 0.75rem;
   }
 }
+
+
+/* Learning sequence labels */
+
+.learning-step-label {
+  width: fit-content;
+  margin: 0.25rem auto 0.85rem;
+  padding: 0.45rem 0.85rem;
+  border: 2px solid rgba(246, 230, 172, 0.35);
+  border-radius: 999px;
+  color: #f7dc83;
+  background: rgba(4, 28, 40, 0.72);
+  font-size: 0.78rem;
+  font-weight: 1000;
+  letter-spacing: 0.12em;
+}
+
+.mastery-message {
+  margin: 0.8rem auto 1.2rem;
+  color: #f4e7c1;
+  font-weight: 800;
+}
+
+.complete-screen .score-details {
+  width: min(760px, 94vw);
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 650px) {
+  .complete-screen .score-details {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+}

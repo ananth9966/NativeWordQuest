@@ -28,12 +28,19 @@ export default function App() {
   const [words, setWords] = useState([]);
   const [player, setPlayer] = useState(loadPlayer);
   const [selectedLevel, setSelectedLevel] = useState(1);
+
+  // Stores the result from Step 1 (Word Guess).
+  // The level is not awarded until Step 2 is also completed.
+  const [pendingWordleResult, setPendingWordleResult] = useState(null);
+
   const [lastResult, setLastResult] = useState({
     guesses: 0,
     stars: 0,
     score: 0,
-    elapsed: 0
+    elapsed: 0,
+    recognitionAttempts: 0
   });
+
   const [loadingError, setLoadingError] = useState("");
 
   useEffect(() => {
@@ -80,14 +87,43 @@ export default function App() {
     }
 
     setSelectedLevel(numericLevel);
-    setScreen("quiz");
+    setPendingWordleResult(null);
+
+    // IMPORTANT CHANGE:
+    // Step 1 is independent recall BEFORE the learner sees the answer pair.
+    setScreen("wordle");
   }
 
   function finishWordle(result) {
-    const newStars = Number(result.stars || 1);
+    // Do NOT unlock the level yet.
+    // Save the recall performance, then move to recognition/reinforcement.
+    setPendingWordleResult(result);
+    setScreen("quiz");
+  }
+
+  function finishRecognition({ attempts }) {
+    const recall = pendingWordleResult || {
+      guesses: 6,
+      stars: 1,
+      score: 100,
+      elapsed: 0
+    };
+
+    const recognitionBonus = attempts === 1 ? 50 : 25;
+    const combinedResult = {
+      ...recall,
+      recognitionAttempts: attempts,
+      score: Number(recall.score || 0) + recognitionBonus
+    };
+
+    const newStars = Number(recall.stars || 1);
     const previousStars = Number(player.completed?.[selectedLevel] || 0);
     const bestStars = Math.max(previousStars, newStars);
-    const nextLevel = Math.min(words.length, Math.max(currentLevel, selectedLevel + 1));
+
+    const nextLevel = Math.min(
+      words.length,
+      Math.max(currentLevel, selectedLevel + 1)
+    );
 
     setPlayer((previous) => ({
       ...previous,
@@ -98,17 +134,19 @@ export default function App() {
       }
     }));
 
-    setLastResult(result);
+    setLastResult(combinedResult);
     setScreen("complete");
   }
 
   function replay() {
+    setPendingWordleResult(null);
     setScreen("wordle");
   }
 
   function nextLevel() {
     const next = Math.min(words.length, selectedLevel + 1);
     setSelectedLevel(next);
+    setPendingWordleResult(null);
     setScreen("levels");
   }
 
@@ -120,13 +158,15 @@ export default function App() {
     const word = words[dailyIndex];
 
     setSelectedLevel(Number(word.level));
-    setScreen("quiz");
+    setPendingWordleResult(null);
+    setScreen("wordle");
   }
 
   function resetProgress() {
     const reset = { ...DEFAULT_PLAYER };
     setPlayer(reset);
     setSelectedLevel(1);
+    setPendingWordleResult(null);
     localStorage.removeItem("odaminodaa-player");
     setScreen("home");
   }
@@ -196,24 +236,26 @@ export default function App() {
         />
       )}
 
+      {/* STEP 1: Independent recall */}
+      {screen === "wordle" && selectedWord && (
+        <WordleChallenge
+          word={selectedWord}
+          level={selectedLevel}
+          {...common}
+          onBack={() => setScreen("levels")}
+          onComplete={finishWordle}
+        />
+      )}
+
+      {/* STEP 2: Recognition / reinforcement */}
       {screen === "quiz" && selectedWord && (
         <MultipleChoice
           word={selectedWord}
           words={words}
           level={selectedLevel}
           {...common}
-          onBack={() => setScreen("levels")}
-          onContinue={() => setScreen("wordle")}
-        />
-      )}
-
-      {screen === "wordle" && selectedWord && (
-        <WordleChallenge
-          word={selectedWord}
-          level={selectedLevel}
-          {...common}
-          onBack={() => setScreen("quiz")}
-          onComplete={finishWordle}
+          onBack={() => setScreen("wordle")}
+          onComplete={finishRecognition}
         />
       )}
 

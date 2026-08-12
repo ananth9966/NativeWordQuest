@@ -145,10 +145,10 @@ ojibwe-word-journey/
 1. Start at **Home**.
 2. Select **Continue Journey** or **World Map**.
 3. Open the currently unlocked level.
-4. Answer the multiple-choice Ojibwe meaning question.
-5. Complete the Word Challenge by typing the Ojibwe word.
-6. Earn stars based on the number of guesses.
-7. The next level unlocks automatically.
+4. Complete the Word Challenge first: English meaning → independently recall the Ojibwe word.
+5. Complete the multiple-choice recognition activity second: Ojibwe word → English meaning.
+6. Earn stars from the independent recall performance.
+7. The next level unlocks only after both steps are completed.
 8. Progress remains saved in local storage.
 
 The menu button on the Home screen resets the demo progress.
