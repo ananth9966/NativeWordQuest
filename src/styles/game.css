@@ -1482,3 +1482,616 @@ button:focus-visible {
   font-size: clamp(1.05rem, 2.5vw, 1.35rem);
   font-weight: 900;
 }
+
+
+/* =========================================================
+   Scalable TSV-driven Worlds / Lessons
+   ========================================================= */
+
+.scalable-map-screen {
+  min-height: 100vh;
+  overflow-y: auto;
+  padding-bottom: 3rem;
+}
+
+.dynamic-world-grid {
+  position: relative;
+  z-index: 5;
+  width: min(1120px, 94vw);
+  margin: 2.2rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.15rem;
+}
+
+.dynamic-world-card {
+  min-height: 230px;
+  padding: 1rem;
+  border: 4px solid #4d3418;
+  border-radius: 24px;
+  color: #f8efcf;
+  background: linear-gradient(180deg, rgba(108, 148, 59, 0.96), rgba(48, 88, 39, 0.97));
+  box-shadow:
+    inset 0 3px rgba(255, 255, 255, 0.15),
+    0 7px 0 #2b4a23,
+    0 14px 22px rgba(0, 0, 0, 0.28);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 150ms ease, filter 150ms ease;
+}
+
+.dynamic-world-card:hover {
+  transform: translateY(-5px);
+  filter: brightness(1.08);
+}
+
+.world-number {
+  align-self: flex-start;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(3, 30, 35, 0.48);
+  font-size: 0.74rem;
+  font-weight: 1000;
+  letter-spacing: 0.08em;
+}
+
+.world-card-icon {
+  margin: 0.55rem 0;
+  font-size: 3.7rem;
+}
+
+.dynamic-world-card strong {
+  font-size: 1.35rem;
+}
+
+.world-word-count {
+  margin-top: 0.45rem;
+  color: #e9e2c4;
+  font-size: 0.85rem;
+}
+
+.world-progress-track {
+  width: 92%;
+  height: 13px;
+  margin-top: auto;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(8, 38, 35, 0.58);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.world-progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #f0ba2f, #ffe276);
+}
+
+.dynamic-world-card small {
+  margin-top: 0.45rem;
+  color: #f1e8c6;
+}
+
+.lesson-stack {
+  position: relative;
+  z-index: 5;
+  width: min(1040px, 94vw);
+  margin: 1.6rem auto 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.lesson-panel {
+  padding: 1rem 1.15rem 1.3rem;
+  border: 4px solid rgba(100, 73, 34, 0.9);
+  border-radius: 23px;
+  background: linear-gradient(
+    180deg,
+    rgba(113, 68, 31, 0.96),
+    rgba(68, 40, 21, 0.97)
+  );
+  box-shadow: 0 7px 0 rgba(44, 26, 13, 0.9);
+}
+
+.lesson-panel-locked {
+  filter: grayscale(0.72) brightness(0.72);
+}
+
+.lesson-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  color: #f7e6b6;
+}
+
+.lesson-header span,
+.lesson-header strong {
+  display: block;
+}
+
+.lesson-header > div > span {
+  font-size: 1rem;
+  font-weight: 1000;
+  letter-spacing: 0.09em;
+}
+
+.lesson-header > div > strong {
+  margin-top: 0.2rem;
+  font-size: 0.86rem;
+  color: #eadcbc;
+}
+
+.lesson-state {
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(5, 31, 35, 0.52);
+  font-size: 0.76rem;
+  font-weight: 1000;
+}
+
+.dynamic-level-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.category-mini-label {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #e9e2c4;
+  font-size: 0.63rem;
+  font-weight: 800;
+}
+
+.collection-search {
+  width: min(560px, 88vw);
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border: 3px solid rgba(231, 214, 165, 0.32);
+  border-radius: 999px;
+  outline: none;
+  color: #f6edcd;
+  background: rgba(3, 29, 40, 0.7);
+  font: inherit;
+}
+
+.collection-search::placeholder {
+  color: #aebdb8;
+}
+
+.scalable-collection-grid .word-collection-card {
+  position: relative;
+  min-height: 180px;
+}
+
+.collection-world-chip {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  padding: 0.25rem 0.45rem;
+  border-radius: 999px;
+  background: rgba(75, 52, 24, 0.16);
+  font-size: 0.67rem;
+  font-weight: 1000;
+}
+
+.completion-category {
+  color: #c5d2ca;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .dynamic-world-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dynamic-level-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .dynamic-world-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dynamic-level-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lesson-header {
+    align-items: flex-start;
+  }
+}
+
+
+/* =========================================================
+   Footstep trail level selector
+   ========================================================= */
+
+.footstep-trail-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.footstep-track-item {
+  position: relative;
+  width: min(360px, 92vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footstep-level {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 150ms ease, filter 150ms ease;
+}
+
+.footstep-level:hover {
+  filter: brightness(1.06);
+}
+
+.footstep-level:disabled {
+  cursor: not-allowed;
+}
+
+.step-left .footstep-level {
+  transform: translateX(-54px) rotate(-10deg);
+}
+
+.step-right .footstep-level {
+  transform: translateX(54px) rotate(10deg);
+}
+
+.step-left .footstep-level:hover {
+  transform: translateX(-54px) rotate(-10deg) scale(1.035);
+}
+
+.step-right .footstep-level:hover {
+  transform: translateX(54px) rotate(10deg) scale(1.035);
+}
+
+.footstep-shape {
+  position: relative;
+  width: 82px;
+  height: 112px;
+  border-radius: 48% 48% 44% 44% / 34% 34% 64% 64%;
+  border: 3px solid #6c4724;
+  background: linear-gradient(180deg, #d8b36a, #b9803b);
+  box-shadow:
+    inset 0 3px rgba(255, 255, 255, 0.2),
+    0 6px 0 #7b5327,
+    0 12px 18px rgba(0, 0, 0, 0.22);
+}
+
+.toe {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid #6c4724;
+  background: linear-gradient(180deg, #d8b36a, #b9803b);
+}
+
+.toe-1 {
+  width: 18px;
+  height: 18px;
+  top: -14px;
+  left: 18px;
+}
+
+.toe-2 {
+  width: 16px;
+  height: 16px;
+  top: -8px;
+  left: 38px;
+}
+
+.toe-3 {
+  width: 14px;
+  height: 14px;
+  top: 8px;
+  left: 54px;
+}
+
+.toe-4 {
+  width: 12px;
+  height: 12px;
+  top: 28px;
+  left: 60px;
+}
+
+.footstep-number {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #2f1d0e;
+  font-size: 1.35rem;
+  font-weight: 1000;
+}
+
+.footstep-lock {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  font-size: 1.08rem;
+}
+
+.footstep-meta {
+  margin-top: 0.45rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.footstep-connector {
+  width: 0;
+  height: 34px;
+  margin: 0.15rem 0 0.4rem;
+  border-left: 5px dotted rgba(239, 220, 169, 0.8);
+  opacity: 0.85;
+}
+
+.step-left .footstep-connector {
+  transform: translateX(-18px);
+}
+
+.step-right .footstep-connector {
+  transform: translateX(18px);
+}
+
+.footstep-locked .footstep-shape,
+.footstep-locked .toe {
+  border-color: #474747;
+  background: linear-gradient(180deg, #8d8d8d, #626262);
+  box-shadow:
+    inset 0 3px rgba(255, 255, 255, 0.12),
+    0 6px 0 #3d3d3d,
+    0 10px 18px rgba(0, 0, 0, 0.22);
+}
+
+.footstep-locked {
+  filter: grayscale(0.45) brightness(0.88);
+}
+
+.footstep-current .footstep-shape,
+.footstep-current .toe {
+  background: linear-gradient(180deg, #f8df87, #e2a92e);
+  box-shadow:
+    inset 0 3px rgba(255, 255, 255, 0.28),
+    0 6px 0 #9a6b13,
+    0 0 16px rgba(255, 214, 77, 0.45);
+}
+
+.footstep-current .footstep-shape {
+  animation: footstepPulse 1.3s infinite ease-in-out;
+}
+
+@keyframes footstepPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 620px) {
+  .footstep-track-item {
+    width: min(280px, 94vw);
+  }
+
+  .step-left .footstep-level {
+    transform: translateX(-28px) rotate(-8deg);
+  }
+
+  .step-right .footstep-level {
+    transform: translateX(28px) rotate(8deg);
+  }
+
+  .step-left .footstep-level:hover {
+    transform: translateX(-28px) rotate(-8deg) scale(1.03);
+  }
+
+  .step-right .footstep-level:hover {
+    transform: translateX(28px) rotate(8deg) scale(1.03);
+  }
+
+  .step-left .footstep-connector {
+    transform: translateX(-10px);
+  }
+
+  .step-right .footstep-connector {
+    transform: translateX(10px);
+  }
+}
+
+
+/* =========================================================
+   Curved forest trail for footstep levels
+   ========================================================= */
+
+.forest-level-screen {
+  overflow-y: auto;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(121, 180, 174, 0.22), transparent 18%),
+    linear-gradient(180deg, #073349 0%, #0d4c4a 40%, #174732 74%, #102e20 100%);
+}
+
+.forest-level-screen::after {
+  opacity: 0.38;
+}
+
+.forest-lesson-stack {
+  width: min(980px, 96vw);
+}
+
+.forest-lesson-panel {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  border-color: rgba(65, 73, 37, 0.95);
+  background:
+    radial-gradient(ellipse at 10% 15%, rgba(63, 104, 46, 0.96) 0 16%, transparent 17%),
+    radial-gradient(ellipse at 92% 23%, rgba(55, 95, 42, 0.96) 0 18%, transparent 19%),
+    radial-gradient(ellipse at 12% 72%, rgba(43, 83, 36, 0.96) 0 22%, transparent 23%),
+    radial-gradient(ellipse at 90% 80%, rgba(40, 78, 34, 0.96) 0 22%, transparent 23%),
+    linear-gradient(180deg, #557a42 0%, #385b35 47%, #29482d 100%);
+  box-shadow:
+    inset 0 0 60px rgba(8, 31, 18, 0.45),
+    0 8px 0 #24371e,
+    0 15px 25px rgba(0, 0, 0, 0.32);
+}
+
+.forest-lesson-header {
+  position: relative;
+  z-index: 20;
+  margin: 0;
+  padding: 1rem 1.2rem;
+  background: linear-gradient(180deg, rgba(70, 42, 20, 0.96), rgba(52, 31, 17, 0.94));
+  border-bottom: 3px solid rgba(42, 58, 28, 0.9);
+}
+
+.forest-trail-canvas {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 15%, rgba(221, 232, 185, 0.11), transparent 14%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.018) 0 2px,
+      transparent 2px 26px
+    );
+}
+
+.curved-forest-trail {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.trail-earth {
+  fill: none;
+  stroke: #9b7644;
+  stroke-width: 118;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.9;
+  filter: drop-shadow(0 8px 5px rgba(30, 26, 14, 0.42));
+}
+
+.trail-highlight {
+  fill: none;
+  stroke: rgba(239, 218, 159, 0.72);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-dasharray: 8 17;
+}
+
+.forest-bank {
+  position: absolute;
+  z-index: 4;
+  top: 20px;
+  bottom: 20px;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0.92;
+}
+
+.forest-bank-left {
+  left: 0;
+}
+
+.forest-bank-right {
+  right: 0;
+}
+
+.forest-bank span {
+  display: block;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  filter: drop-shadow(0 6px 4px rgba(0, 0, 0, 0.32));
+}
+
+.forest-bank-left span:nth-child(even),
+.forest-bank-right span:nth-child(odd) {
+  transform: scale(0.82) translateX(12px);
+  opacity: 0.82;
+}
+
+.trail-footstep {
+  position: absolute;
+  z-index: 12;
+  transform-origin: center center;
+  translate: -50% -50%;
+}
+
+.trail-footstep.step-left {
+  rotate: -11deg;
+}
+
+.trail-footstep.step-right {
+  rotate: 11deg;
+}
+
+.trail-footstep:hover:not(:disabled) {
+  scale: 1.04;
+}
+
+.trail-footstep-meta {
+  min-width: 120px;
+  padding: 0.25rem 0.45rem;
+  border-radius: 12px;
+  background: rgba(16, 42, 31, 0.72);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.22);
+}
+
+.trail-footstep .category-mini-label {
+  color: #f1e6c3;
+}
+
+@media (max-width: 700px) {
+  .forest-bank {
+    width: 16%;
+    opacity: 0.68;
+  }
+
+  .forest-bank span {
+    font-size: 2.7rem;
+  }
+
+  .trail-earth {
+    stroke-width: 98;
+  }
+
+  .trail-footstep-meta {
+    min-width: 94px;
+  }
+}

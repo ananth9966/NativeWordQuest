@@ -3,20 +3,21 @@ import GameTopBar from "./GameTopBar";
 export default function HomeScreen({
   player,
   stars,
+  nextPlayable,
   onContinue,
   onWorldMap,
   onDaily,
   onCollection,
   onReset
 }) {
+  const nextWorld = nextPlayable?.world?.shortName || "Word Journey";
+
   return (
     <main className="screen home-screen">
       <GameTopBar title="" streak={player.streak} stars={stars} onMenu={onReset} />
 
       <section className="hero-title">
-        <div className="flying-eagle" aria-hidden="true">
-          🦅
-        </div>
+        <div className="flying-eagle" aria-hidden="true">🦅</div>
 
         <h1>
           <span>OJIBWE</span>
@@ -30,7 +31,7 @@ export default function HomeScreen({
         <span className="wood-knot" />
         <span>
           <strong>CONTINUE JOURNEY</strong>
-          <small>Level {player.currentLevel} · Animals</small>
+          <small>{nextPlayable ? `${nextWorld} · Next word` : "Journey complete"}</small>
         </span>
         <b className="continue-arrow">➜</b>
       </button>
@@ -53,12 +54,10 @@ export default function HomeScreen({
         </button>
       </section>
 
-      <div className="canoe-decoration" aria-hidden="true">
-        🛶
-      </div>
+      <div className="canoe-decoration" aria-hidden="true">🛶</div>
 
       <p className="demo-note">
-        Demo prototype · Progress is saved in this browser
+        TSV-driven prototype · Progress is saved in this browser
       </p>
     </main>
   );

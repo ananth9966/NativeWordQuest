@@ -17,9 +17,7 @@ function evaluateGuess(guess, answer) {
   for (let index = 0; index < answer.length; index += 1) {
     if (result[index] === "exact") continue;
 
-    const foundIndex = remaining.findIndex(
-      (letter) => letter === guess[index]
-    );
+    const foundIndex = remaining.findIndex((letter) => letter === guess[index]);
 
     if (foundIndex >= 0) {
       result[index] = "present";
@@ -31,33 +29,24 @@ function evaluateGuess(guess, answer) {
 }
 
 function formatTime(seconds) {
-  const minutes = Math.floor(seconds / 60)
-    .toString()
-    .padStart(2, "0");
-
-  const remainder = Math.floor(seconds % 60)
-    .toString()
-    .padStart(2, "0");
-
+  const minutes = Math.floor(seconds / 60).toString().padStart(2, "0");
+  const remainder = Math.floor(seconds % 60).toString().padStart(2, "0");
   return `${minutes}:${remainder}`;
 }
 
 export default function WordleChallenge({
   word,
-  level,
   player,
   stars,
   onBack,
   onComplete
 }) {
   const answer = word.ojibwe.toUpperCase();
-
   const [guesses, setGuesses] = useState([]);
   const [current, setCurrent] = useState("");
   const [message, setMessage] = useState(
-    "Recall the Ojibwe word from the English meaning."
+    "Use the category hint and your memory."
   );
-
   const [startedAt] = useState(() => Date.now());
   const [elapsed, setElapsed] = useState(0);
 
@@ -81,12 +70,7 @@ export default function WordleChallenge({
       guess.split("").forEach((letter, index) => {
         const next = evaluation[index];
         const previous = states[letter];
-
-        const priority = {
-          absent: 1,
-          present: 2,
-          exact: 3
-        };
+        const priority = { absent: 1, present: 2, exact: 3 };
 
         if (!previous || priority[next] > priority[previous]) {
           states[letter] = next;
@@ -124,12 +108,7 @@ export default function WordleChallenge({
 
     if (current === answer) {
       const guessCount = nextGuesses.length;
-
-      const earnedStars =
-        guessCount <= 2 ? 3 :
-        guessCount <= 4 ? 2 :
-        1;
-
+      const earnedStars = guessCount <= 2 ? 3 : guessCount <= 4 ? 2 : 1;
       const score = earnedStars * 100;
 
       setMessage("Correct! Now confirm the meaning.");
@@ -147,8 +126,6 @@ export default function WordleChallenge({
     }
 
     if (nextGuesses.length >= 6) {
-      // The learner did not independently recall the word.
-      // Continue to recognition practice with one star.
       setMessage(
         "Recall attempt complete. Continue to recognition practice."
       );
@@ -180,83 +157,52 @@ export default function WordleChallenge({
     }
 
     window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+    return () => window.removeEventListener("keydown", handleKeyDown);
   });
 
-  const displayRows = Array.from({ length: 6 }).map(
-    (_, rowIndex) => {
-      const isCurrentRow =
-        rowIndex === guesses.length && !solved && !failed;
+  const displayRows = Array.from({ length: 6 }).map((_, rowIndex) => {
+    const isCurrentRow = rowIndex === guesses.length && !solved && !failed;
+    const guess = guesses[rowIndex] || (isCurrentRow ? current : "");
+    const submitted = Boolean(guesses[rowIndex]);
+    const evaluation = submitted ? evaluateGuess(guess, answer) : [];
 
-      const guess =
-        guesses[rowIndex] ||
-        (isCurrentRow ? current : "");
-
-      const submitted = Boolean(guesses[rowIndex]);
-
-      const evaluation = submitted
-        ? evaluateGuess(guess, answer)
-        : [];
-
-      return {
-        guess,
-        submitted,
-        evaluation
-      };
-    }
-  );
+    return { guess, submitted, evaluation };
+  });
 
   return (
     <main className="screen wordle-screen">
       <GameTopBar
-        title={`Level ${level} · Step 1 of 2`}
+        title={`${word.worldShortName} · Step 1 of 2`}
         streak={player.streak}
         stars={stars}
         onBack={onBack}
       />
 
       <section className="wordle-content">
-        <div className="learning-step-label">
-          INDEPENDENT RECALL
-        </div>
+        <div className="learning-step-label">INDEPENDENT RECALL</div>
 
-        <h1>
-          Guess the Ojibwe word
-        </h1>
+        <h1>Guess the Ojibwe word</h1>
 
         <div className="recall-hint">
-          Hint: {word.category === "Animals" ? "Animal" : word.category}
+          Hint: {word.categoryLabel}
         </div>
 
         <p className="wordle-hint">
-          Use the hint and your memory to identify the word.
+          The English meaning is hidden until the recall attempt is over.
         </p>
 
         <div
           className="wordle-grid"
-          style={{
-            "--answer-length": Math.max(answer.length, 4)
-          }}
+          style={{ "--answer-length": Math.max(answer.length, 4) }}
         >
           {displayRows.map((row, rowIndex) => (
             <div className="wordle-row" key={rowIndex}>
-              {Array.from({
-                length: answer.length
-              }).map((_, column) => {
+              {Array.from({ length: answer.length }).map((_, column) => {
                 const letter = row.guess[column] || "";
-
-                const state = row.submitted
-                  ? row.evaluation[column]
-                  : "";
+                const state = row.submitted ? row.evaluation[column] : "";
 
                 return (
-                  <div
-                    className={`wordle-tile ${state}`}
-                    key={column}
-                  >
+                  <div className={`wordle-tile ${state}`} key={column}>
                     {letter}
                   </div>
                 );
@@ -265,16 +211,11 @@ export default function WordleChallenge({
           ))}
         </div>
 
-        <div className="wordle-message">
-          {message}
-        </div>
+        <div className="wordle-message">{message}</div>
 
         <div className="keyboard">
           {KEY_ROWS.map((row) => (
-            <div
-              className="keyboard-row"
-              key={row}
-            >
+            <div className="keyboard-row" key={row}>
               {[...row].map((letter) => (
                 <button
                   key={letter}
@@ -288,25 +229,12 @@ export default function WordleChallenge({
           ))}
 
           <div className="keyboard-actions">
-            <button
-              className="wide-key"
-              onClick={submitGuess}
-            >
-              ENTER
-            </button>
-
-            <button
-              className="wide-key"
-              onClick={removeLetter}
-            >
-              ⌫
-            </button>
+            <button className="wide-key" onClick={submitGuess}>ENTER</button>
+            <button className="wide-key" onClick={removeLetter}>⌫</button>
           </div>
         </div>
 
-        <div className="timer">
-          Time {formatTime(elapsed)}
-        </div>
+        <div className="timer">Time {formatTime(elapsed)}</div>
       </section>
     </main>
   );

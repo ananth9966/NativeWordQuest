@@ -7,16 +7,19 @@ import WordleChallenge from "./components/WordleChallenge";
 import LevelComplete from "./components/LevelComplete";
 import WordCollection from "./components/WordCollection";
 import { loadTSV } from "./utils/loadTSV";
+import {
+  buildWorlds,
+  getNextPlayableWord,
+  prepareWords,
+  starsForWord
+} from "./utils/gameData";
 
-const DEFAULT_PLAYER = {
-  streak: 5,
-  completed: {},
-  currentLevel: 1
-};
+const STORAGE_KEY = "odaminodaa-player-v3";
+const DEFAULT_PLAYER = { streak: 5, completed: {} };
 
 function loadPlayer() {
   try {
-    const saved = localStorage.getItem("odaminodaa-player");
+    const saved = localStorage.getItem(STORAGE_KEY);
     return saved ? { ...DEFAULT_PLAYER, ...JSON.parse(saved) } : DEFAULT_PLAYER;
   } catch {
     return DEFAULT_PLAYER;
@@ -27,12 +30,9 @@ export default function App() {
   const [screen, setScreen] = useState("home");
   const [words, setWords] = useState([]);
   const [player, setPlayer] = useState(loadPlayer);
-  const [selectedLevel, setSelectedLevel] = useState(1);
-
-  // Stores the result from Step 1 (Word Guess).
-  // The level is not awarded until Step 2 is also completed.
+  const [selectedWorldId, setSelectedWorldId] = useState(null);
+  const [selectedWordId, setSelectedWordId] = useState(null);
   const [pendingWordleResult, setPendingWordleResult] = useState(null);
-
   const [lastResult, setLastResult] = useState({
     guesses: 0,
     stars: 0,
@@ -40,63 +40,68 @@ export default function App() {
     elapsed: 0,
     recognitionAttempts: 0
   });
-
   const [loadingError, setLoadingError] = useState("");
 
   useEffect(() => {
     const path = `${import.meta.env.BASE_URL}data/words.tsv`;
 
     loadTSV(path)
-      .then((rows) => {
-        setWords(rows);
-        setSelectedLevel((current) => {
-          const max = Math.max(1, rows.length);
-          return Math.min(current, max);
-        });
-      })
+      .then((rawRows) => setWords(prepareWords(rawRows)))
       .catch((error) => setLoadingError(error.message));
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("odaminodaa-player", JSON.stringify(player));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(player));
   }, [player]);
+
+  const worlds = useMemo(() => buildWorlds(words), [words]);
 
   const totalStars = useMemo(
     () =>
       Object.values(player.completed || {}).reduce(
-        (sum, value) => sum + Number(value || 0),
+        (sum, record) => sum + Number(record?.stars || 0),
         0
       ),
     [player.completed]
   );
 
-  const currentLevel = Math.max(
-    1,
-    Math.min(Number(player.currentLevel || 1), Math.max(words.length, 1))
+  const nextPlayable = useMemo(
+    () => getNextPlayableWord(player, worlds),
+    [player, worlds]
   );
 
+  const selectedWorld =
+    worlds.find((world) => world.id === Number(selectedWorldId)) ||
+    nextPlayable?.world ||
+    worlds[0];
+
   const selectedWord =
-    words.find((word) => Number(word.level) === Number(selectedLevel)) ||
+    words.find((word) => word.id === selectedWordId) ||
+    nextPlayable?.word ||
     words[0];
 
-  function startLevel(level) {
-    const numericLevel = Number(level);
+  function openWorld(worldId) {
+    setSelectedWorldId(Number(worldId));
+    setScreen("levels");
+  }
 
-    if (numericLevel > currentLevel) {
-      return;
-    }
-
-    setSelectedLevel(numericLevel);
+  function startWord(wordId, worldId) {
+    setSelectedWordId(wordId);
+    setSelectedWorldId(Number(worldId));
     setPendingWordleResult(null);
+    setScreen("wordle");
+  }
 
-    // IMPORTANT CHANGE:
-    // Step 1 is independent recall BEFORE the learner sees the answer pair.
+  function continueJourney() {
+    if (!nextPlayable) return;
+
+    setSelectedWorldId(nextPlayable.world.id);
+    setSelectedWordId(nextPlayable.word.id);
+    setPendingWordleResult(null);
     setScreen("wordle");
   }
 
   function finishWordle(result) {
-    // Do NOT unlock the level yet.
-    // Save the recall performance, then move to recognition/reinforcement.
     setPendingWordleResult(result);
     setScreen("quiz");
   }
@@ -110,27 +115,26 @@ export default function App() {
     };
 
     const recognitionBonus = attempts === 1 ? 50 : 25;
+    const previousStars = starsForWord(player, selectedWord.id);
+    const bestStars = Math.max(previousStars, Number(recall.stars || 1));
+
     const combinedResult = {
       ...recall,
       recognitionAttempts: attempts,
       score: Number(recall.score || 0) + recognitionBonus
     };
 
-    const newStars = Number(recall.stars || 1);
-    const previousStars = Number(player.completed?.[selectedLevel] || 0);
-    const bestStars = Math.max(previousStars, newStars);
-
-    const nextLevel = Math.min(
-      words.length,
-      Math.max(currentLevel, selectedLevel + 1)
-    );
-
     setPlayer((previous) => ({
       ...previous,
-      currentLevel: nextLevel,
       completed: {
         ...previous.completed,
-        [selectedLevel]: bestStars
+        [selectedWord.id]: {
+          stars: bestStars,
+          lastRecallGuesses: recall.guesses,
+          lastRecognitionAttempts: attempts,
+          lastScore: combinedResult.score,
+          completedAt: new Date().toISOString()
+        }
       }
     }));
 
@@ -138,36 +142,29 @@ export default function App() {
     setScreen("complete");
   }
 
-  function replay() {
+  function replayCurrentWord() {
     setPendingWordleResult(null);
     setScreen("wordle");
-  }
-
-  function nextLevel() {
-    const next = Math.min(words.length, selectedLevel + 1);
-    setSelectedLevel(next);
-    setPendingWordleResult(null);
-    setScreen("levels");
   }
 
   function startDaily() {
     if (!words.length) return;
 
     const dayNumber = Math.floor(Date.now() / 86400000);
-    const dailyIndex = dayNumber % words.length;
-    const word = words[dailyIndex];
+    const word = words[dayNumber % words.length];
 
-    setSelectedLevel(Number(word.level));
+    setSelectedWorldId(word.worldId);
+    setSelectedWordId(word.id);
     setPendingWordleResult(null);
     setScreen("wordle");
   }
 
   function resetProgress() {
-    const reset = { ...DEFAULT_PLAYER };
-    setPlayer(reset);
-    setSelectedLevel(1);
+    setPlayer({ ...DEFAULT_PLAYER });
+    setSelectedWordId(null);
+    setSelectedWorldId(null);
     setPendingWordleResult(null);
-    localStorage.removeItem("odaminodaa-player");
+    localStorage.removeItem(STORAGE_KEY);
     setScreen("home");
   }
 
@@ -176,14 +173,12 @@ export default function App() {
       <main className="loading-screen">
         <h1>Odaminodaa</h1>
         <p>{loadingError}</p>
-        <p>
-          Make sure <code>public/data/words.tsv</code> exists.
-        </p>
+        <p>Make sure <code>public/data/words.tsv</code> exists and uses tabs.</p>
       </main>
     );
   }
 
-  if (!words.length) {
+  if (!words.length || !worlds.length) {
     return (
       <main className="loading-screen">
         <div className="loading-star">★</div>
@@ -192,18 +187,14 @@ export default function App() {
     );
   }
 
-  const common = {
-    player,
-    stars: totalStars,
-    totalLevels: words.length
-  };
-
   return (
     <div className="game-shell">
       {screen === "home" && (
         <HomeScreen
-          {...common}
-          onContinue={() => setScreen("world-map")}
+          player={player}
+          stars={totalStars}
+          nextPlayable={nextPlayable}
+          onContinue={continueJourney}
           onWorldMap={() => setScreen("world-map")}
           onDaily={startDaily}
           onCollection={() => setScreen("collection")}
@@ -213,47 +204,53 @@ export default function App() {
 
       {screen === "world-map" && (
         <WorldMap
-          {...common}
+          player={player}
+          stars={totalStars}
+          worlds={worlds}
           onBack={() => setScreen("home")}
-          onLevels={() => setScreen("levels")}
-          onLevel={startLevel}
+          onWorld={openWorld}
         />
       )}
 
-      {screen === "levels" && (
+      {screen === "levels" && selectedWorld && (
         <LevelSelect
-          {...common}
+          player={player}
+          stars={totalStars}
+          world={selectedWorld}
           onBack={() => setScreen("world-map")}
-          onPlay={startLevel}
+          onPlay={(wordId) => startWord(wordId, selectedWorld.id)}
         />
       )}
 
       {screen === "collection" && (
         <WordCollection
           words={words}
-          {...common}
+          worlds={worlds}
+          player={player}
+          stars={totalStars}
           onBack={() => setScreen("home")}
         />
       )}
 
-      {/* STEP 1: Independent recall */}
       {screen === "wordle" && selectedWord && (
         <WordleChallenge
           word={selectedWord}
-          level={selectedLevel}
-          {...common}
-          onBack={() => setScreen("levels")}
+          player={player}
+          stars={totalStars}
+          onBack={() => {
+            setSelectedWorldId(selectedWord.worldId);
+            setScreen("levels");
+          }}
           onComplete={finishWordle}
         />
       )}
 
-      {/* STEP 2: Recognition / reinforcement */}
       {screen === "quiz" && selectedWord && (
         <MultipleChoice
           word={selectedWord}
           words={words}
-          level={selectedLevel}
-          {...common}
+          player={player}
+          stars={totalStars}
           onBack={() => setScreen("wordle")}
           onComplete={finishRecognition}
         />
@@ -263,9 +260,12 @@ export default function App() {
         <LevelComplete
           word={selectedWord}
           result={lastResult}
-          {...common}
-          onReplay={replay}
-          onNext={nextLevel}
+          onReplay={replayCurrentWord}
+          onNext={() => {
+            setPendingWordleResult(null);
+            setSelectedWorldId(selectedWord.worldId);
+            setScreen("levels");
+          }}
           onMap={() => setScreen("world-map")}
         />
       )}

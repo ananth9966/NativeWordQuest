@@ -1,154 +1,124 @@
-# Odaminodaa — Ojibwe Word Journey
+# NativeWordQuest / Odaminodaa — Scalable TSV Version
 
-A self-contained React/Vite prototype of a level-based Ojibwe vocabulary game.
+This React + Vite version is driven directly by your vocabulary TSV.
 
-The demo includes:
-
-- Home / Continue Journey screen
-- World Map
-- Locked/unlocked level progression
-- Five sample Ojibwe words loaded from a TSV file
-- Multiple-choice recognition activity
-- Wordle-style recall challenge
-- 1–3 star scoring
-- Level completion screen
-- Word Collection
-- Daily Challenge button
-- Browser-local progress saving
-- Responsive desktop/mobile layout
-- GitHub Pages deployment workflow
-
-## Sample TSV words
-
-The project ships with five demo words in:
-
-`public/data/words.tsv`
-
-| Ojibwe | English |
-|---|---|
-| makwa | Bear |
-| amik | Beaver |
-| waabooz | Rabbit |
-| migizi | Eagle |
-| mooz | Moose |
-
-Replace or expand the TSV later without rewriting the game interface.
-
-## Run locally
-
-Install Node.js 18 or newer.
-
-```bash
-npm install
-npm run dev
-```
-
-Open the local address shown by Vite, usually:
+## Exact TSV format supported
 
 ```text
-http://localhost:5173
+ojibwe word    english word    group/category
+makwa          bear            animal
+migizi         eagle           animal
+bezhig         one             number
 ```
 
-## Build
+The fields must be separated with TAB characters.
 
-```bash
-npm run build
-```
+The game automatically:
 
-The production site is created in `dist/`.
+- normalizes common category spelling variations,
+- creates broad game Worlds,
+- creates Lessons of 10 words,
+- creates level buttons,
+- uses only the category as the Step 1 recall hint,
+- hides the English meaning during Step 1,
+- chooses multiple-choice distractors from the same category first,
+- stores progress by a stable word key rather than a level number.
 
-## Upload to GitHub
+## Gameplay
 
-Create a new GitHub repository, then from this project folder:
-
-```bash
-git init
-git add .
-git commit -m "Initial Odaminodaa prototype"
-git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
-git push -u origin main
-```
-
-## Publish with GitHub Pages
-
-A workflow is already included at:
-
-`.github/workflows/deploy-pages.yml`
-
-After pushing:
-
-1. Open your GitHub repository.
-2. Go to **Settings → Pages**.
-3. Under **Build and deployment**, choose **GitHub Actions** as the source.
-4. Open the **Actions** tab and wait for the `Deploy to GitHub Pages` workflow to finish.
-5. Your site will be available at:
+Step 1:
 
 ```text
-https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/
+Guess the Ojibwe word
+Hint: Animal
+_ _ _ _ _
 ```
 
-Future pushes to `main` will redeploy automatically.
-
-## Add more words
-
-Edit:
-
-`public/data/words.tsv`
-
-Keep the tab-separated headers:
+Step 2:
 
 ```text
-id    ojibwe    english    category    world    level    type    hint
+MAKWA
+
+A. Beaver
+B. Bear
+C. Moose
+D. Fox
 ```
 
-Each new row can become a new game level.
+Stars are based on independent recall:
 
-## Important language note
+- 1–2 guesses: 3 stars
+- 3–4 guesses: 2 stars
+- 5–6 guesses: 1 star
 
-The five words in this repository are demonstration content. For a production/community language-learning resource, language content, pronunciation, spelling, dialect choices, and cultural presentation should be reviewed by the appropriate Ojibwe language experts and community authorities.
+## Automatic Worlds
 
-## Project structure
+1. Animals & Insects
+2. Numbers & Amounts
+3. Weather, Seasons & Time
+4. Actions
+5. People, Family & Body
+6. Conversation
+7. Food & Drink
+8. Home, Clothing & Travel
+9. Land & Nature
+10. Feelings & Descriptions
+11. More Words
+
+Only worlds that actually contain TSV words are shown.
+
+## Category cleanup examples
+
+The code automatically converts:
+
+- `animals` → `animal`
+- `bodypart` → `body part`
+- `verd` → `verb`
+- `emotion` → `feeling`
+- `household oject` → `household`
+- `oject` → `household`
+- `time of day` → `part of day`
+- `bug/bug related` → `insect`
+- `outside` → `nature`
+- `type of tree` → `nature`
+- `vechicle` → `vehicle`
+
+Rows beginning with `FINALIZED...`, blank Ojibwe entries, and blank English entries are ignored.
+
+## Replace the sample with your full TSV
+
+Replace only:
 
 ```text
-ojibwe-word-journey/
-├── .github/
-│   └── workflows/
-│       └── deploy-pages.yml
-├── public/
-│   └── data/
-│       └── words.tsv
-├── src/
-│   ├── components/
-│   │   ├── GameTopBar.jsx
-│   │   ├── HomeScreen.jsx
-│   │   ├── LevelComplete.jsx
-│   │   ├── LevelSelect.jsx
-│   │   ├── MultipleChoice.jsx
-│   │   ├── Stars.jsx
-│   │   ├── WordCollection.jsx
-│   │   ├── WordleChallenge.jsx
-│   │   └── WorldMap.jsx
-│   ├── styles/
-│   │   └── game.css
-│   ├── utils/
-│   │   └── loadTSV.js
-│   ├── App.jsx
-│   └── main.jsx
-├── index.html
-├── package.json
-└── vite.config.js
+public/data/words.tsv
 ```
 
-## Demo gameplay
+Keep the same headers. You do not need to edit React code when you add more words.
 
-1. Start at **Home**.
-2. Select **Continue Journey** or **World Map**.
-3. Open the currently unlocked level.
-4. Complete the Word Challenge first: English meaning → independently recall the Ojibwe word.
-5. Complete the multiple-choice recognition activity second: Ojibwe word → English meaning.
-6. Earn stars from the independent recall performance.
-7. The next level unlocks only after both steps are completed.
-8. Progress remains saved in local storage.
+## Optional permanent ID
 
-The menu button on the Home screen resets the demo progress.
+For the research/database version, a permanent ID is recommended:
+
+```text
+id    ojibwe word    english word    group/category
+0001  makwa          bear            animal
+```
+
+The prototype also works without an ID column.
+
+## GitHub Pages
+
+For your GitHub repository `NativeWordQuest`, keep:
+
+```js
+base: "/NativeWordQuest/"
+```
+
+in `vite.config.js`.
+
+Commit changes to `main` and your GitHub Pages Action can redeploy automatically.
+
+
+## Curved forest trail
+
+Lesson levels are displayed as alternating locked/unlocked footsteps on a curved forest path.
