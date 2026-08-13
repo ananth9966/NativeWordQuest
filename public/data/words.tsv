@@ -1,6 +1,81 @@
-id	ojibwe	english	category	world	level	type	hint
-1	makwa	Bear	Animals	2	1	multiple-choice	A large woodland animal
-2	amik	Beaver	Animals	2	2	multiple-choice	An animal known for building dams
-3	waabooz	Rabbit	Animals	2	3	multiple-choice	A small animal with long ears
-4	migizi	Eagle	Animals	2	4	multiple-choice	A large bird of prey
-5	mooz	Moose	Animals	2	5	multiple-choice	A very large animal with antlers
+ojibwe word	english word	group/category
+makwa	bear	animal
+migizi	eagle (or bald eagle)	animal
+animosh	dog	animal
+amik	beaver	animal
+giigoo	fish	animal
+mooz	moose	animal
+omakakii	frog	animal
+ginebig	snake	animal
+esiban	raccoon	animal
+waabooz	rabbit	animal
+waagosh	fox	animal
+boozh	cat	animal
+bizhiki	cow	animal
+makoons	bear cub	animal
+bizhiw	lynx	animal
+ingodwaak	hundred	number
+bezhig	one	number
+niizh	two	number
+niswi	three	number
+niiwin	four	number
+naanan	five	number
+midaaswi	ten	number
+niizhtana	twenty	number
+awan	foggy, it is	weather
+gimiwan	raining, it is	weather
+noodin	windy, it is	weather
+gisina	cold, it is	weather
+gizhide	hot, it is	weather
+zoogipon	snowing, it is	weather
+biboon	winter	season
+ziigwan	spring	season
+niibin	summer	season
+dagwaagin	fall	season
+baapi	laughing, s/he is	verb
+bimose	walking, s/he is	verb
+giiwe	going home, s/he is	verb
+mawi	crying, s/he is	verb
+biindige	entering, s/he is	verb
+giigiido	speaking, s/he is	verb
+wiisini	eating, s/he is	verb
+anokii	working, s/he is	verb
+nagamo	sings, s/he	verb
+niimi	dance, s/he	verb
+odamino	plays, s/he	verb
+indoon	mouth, my	body part
+injaan	nose, my	body part
+nitawag	ear, my	body part
+ninik	arm, my	body part
+inde	heart, my	body part
+nizid	foot, my	body part
+boozhoo	hello	greeting
+miigwech	thank you	conversational
+gaawiin	no	conversational
+eya	yes	conversational
+daga	please	conversational
+aandi	where	question word
+awenen	who	question word
+aaniin	how	question word
+wegonen	what	question word
+opin	potato	food
+wiiyaas	meat	food
+naboob	soup	food
+baagaan	hazelnut	food
+miin	blueberry	food
+nibi	water	drink
+makizin	shoe	clothing
+midaas	pants	clothing
+wakwaan	hat	clothing
+giiziz	sun	outside
+giizhig	sky	outside
+anang	star	outside
+asin	rock	outside
+aki	earth, land	outside
+waawaate	northern lights	outside
+aniibiish	leaf	outside
+ziibi	river	outside
+aakozi	sick, s/he is	feeling
+ayekozi	tired, s/he is	feeling
+zegizi	afraid, s/he is	emotion
+agiji	embarrassed/shy/bashful, s/he is	emotion
