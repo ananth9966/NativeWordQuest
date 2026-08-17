@@ -1,4 +1,7 @@
 import GameTopBar from "./GameTopBar";
+import SceneBackground from "./SceneBackground";
+import AssetImage from "./AssetImage";
+import { NWQ_ASSETS } from "../assets/assets";
 
 export default function HomeScreen({
   player,
@@ -10,55 +13,58 @@ export default function HomeScreen({
   onCollection,
   onReset
 }) {
-  const nextWorld = nextPlayable?.world?.shortName || "Word Journey";
+  const nextWorld = nextPlayable?.world?.shortName || "Word Quest";
 
   return (
     <main className="screen home-screen">
-      <GameTopBar title="" streak={player.streak} stars={stars} onMenu={onReset} />
+      <SceneBackground src={NWQ_ASSETS.backgrounds.home.day} fit="cover">
+        <GameTopBar title="" streak={player.streak} stars={stars} onMenu={onReset} />
 
-      <section className="hero-title">
-        <div className="flying-eagle" aria-hidden="true">🦅</div>
+        <section className="hero-title">
+          <AssetImage
+            src={NWQ_ASSETS.decorations.eagle}
+            decorative
+            className="flying-eagle-img"
+          />
 
-        <h1>
-          <span>OJIBWE</span>
-          <strong>WORD JOURNEY</strong>
-        </h1>
+          <h1>
+            <span>NATIVE</span>
+            <strong>WORD QUEST</strong>
+          </h1>
 
-        <p>Odaminodaa! Let's Play!</p>
-      </section>
+          <p>Odaminodaa! Let's Play!</p>
+        </section>
 
-      <button className="wood-button continue-button" onClick={onContinue}>
-        <span className="wood-knot" />
-        <span>
-          <strong>CONTINUE JOURNEY</strong>
-          <small>{nextPlayable ? `${nextWorld} · Next word` : "Journey complete"}</small>
-        </span>
-        <b className="continue-arrow">➜</b>
-      </button>
-
-      <section className="home-menu" aria-label="Main game menu">
-        <button className="game-card card-blue" onClick={onWorldMap}>
-          <span className="game-card-icon">🗺️</span>
-          <strong>WORLD MAP</strong>
+        <button className="btn-gold continue-button" onClick={onContinue}>
+          <span>
+            <strong>CONTINUE QUEST</strong>
+            <small>{nextPlayable ? `${nextWorld} · Next word` : "Quest complete"}</small>
+          </span>
+          <b className="continue-arrow">➜</b>
         </button>
 
-        <button className="game-card card-red" onClick={onDaily}>
-          <span className="game-card-icon">🎯</span>
-          <strong>DAILY CHALLENGE</strong>
-          <small>NOONGOM</small>
-        </button>
+        <section className="home-menu" aria-label="Main game menu">
+          <button className="game-card" onClick={onWorldMap}>
+            <AssetImage src={NWQ_ASSETS.gameplay.map} decorative className="game-card-icon-img" />
+            <strong>WORLD MAP</strong>
+          </button>
 
-        <button className="game-card card-green" onClick={onCollection}>
-          <span className="game-card-icon">📖</span>
-          <strong>WORD COLLECTION</strong>
-        </button>
-      </section>
+          <button className="game-card" onClick={onDaily}>
+            <AssetImage src={NWQ_ASSETS.gameplay.target} decorative className="game-card-icon-img" />
+            <strong>DAILY CHALLENGE</strong>
+            <small>NOONGOM</small>
+          </button>
 
-      <div className="canoe-decoration" aria-hidden="true">🛶</div>
+          <button className="game-card" onClick={onCollection}>
+            <AssetImage src={NWQ_ASSETS.gameplay.book} decorative className="game-card-icon-img" />
+            <strong>WORD COLLECTION</strong>
+          </button>
+        </section>
 
-      <p className="demo-note">
-        TSV-driven prototype · Progress is saved in this browser
-      </p>
+        <p className="demo-note">
+          TSV-driven prototype · Progress is saved in this browser
+        </p>
+      </SceneBackground>
     </main>
   );
 }

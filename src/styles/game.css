@@ -50,34 +50,6 @@ button:focus-visible {
   background-color: #0a3348;
 }
 
-.screen::before,
-.screen::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-  z-index: -2;
-}
-
-.screen::before {
-  inset: 0;
-  background:
-    radial-gradient(circle at 75% 20%, rgba(255, 255, 255, 0.14), transparent 20%),
-    linear-gradient(180deg, #0e6d98 0%, #1683ab 35%, #337f76 60%, #153f38 100%);
-}
-
-.screen::after {
-  left: -5%;
-  right: -5%;
-  bottom: -12%;
-  height: 54%;
-  background:
-    radial-gradient(ellipse at 20% 85%, #123b24 0 22%, transparent 23%),
-    radial-gradient(ellipse at 40% 90%, #184b2b 0 28%, transparent 29%),
-    radial-gradient(ellipse at 70% 88%, #143c25 0 31%, transparent 32%),
-    radial-gradient(ellipse at 88% 95%, #0e3320 0 24%, transparent 25%),
-    linear-gradient(180deg, rgba(28, 103, 95, 0) 0 18%, #1a6a6d 19% 49%, #144638 50%);
-}
-
 .loading-screen {
   min-height: 100vh;
   display: grid;
@@ -94,6 +66,60 @@ button:focus-visible {
   animation: star-pulse 1s infinite alternate;
 }
 
+/* =========================================================
+   Wood / parchment button & panel base (illustrated asset pack)
+   ========================================================= */
+
+.btn-gold,
+.btn-green,
+.btn-plank {
+  border: none;
+  border-radius: 18px;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: #4a2a10;
+  font-weight: 900;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.25);
+}
+
+.btn-gold {
+  background-image: url("/NativeWordQuest/assets/ui/buttons/button-gold-wide.png");
+}
+
+.btn-green {
+  background-image: url("/NativeWordQuest/assets/ui/buttons/button-green-wide.png");
+  color: #1f3a10;
+}
+
+.btn-plank {
+  background-image: url("/NativeWordQuest/assets/ui/banners/banner-wood-plank-small.png");
+  color: #fff2d6;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.45);
+}
+
+.panel-parchment {
+  background-color: transparent;
+  background-image: url("/NativeWordQuest/assets/ui/panels/panel-parchment-large.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: #3f2b16;
+}
+
+.banner-large {
+  background-image: url("/NativeWordQuest/assets/ui/banners/banner-wood-hanging-large.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  aspect-ratio: 836 / 257;
+}
+
+.banner-plank {
+  background-image: url("/NativeWordQuest/assets/ui/banners/banner-wood-plank-small.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  aspect-ratio: 402 / 103;
+}
+
 /* Top bar */
 
 .topbar {
@@ -105,32 +131,25 @@ button:focus-visible {
   grid-template-columns: 56px 1fr auto;
   align-items: center;
   gap: 1rem;
-  background: linear-gradient(180deg, rgba(3, 24, 35, 0.75), rgba(3, 24, 35, 0.25));
+  background: linear-gradient(180deg, rgba(3, 24, 35, 0.6), rgba(3, 24, 35, 0.15));
 }
 
 .round-icon-button,
 .avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  border: none;
+  padding: 0;
+  background: none;
   display: grid;
   place-items: center;
-  color: #f8edc7;
-  background: rgba(4, 35, 45, 0.82);
-  border: 2px solid rgba(244, 237, 203, 0.35);
-  box-shadow: inset 0 2px rgba(255, 255, 255, 0.08);
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.4));
 }
 
-.round-icon-button {
-  font-size: 1.8rem;
-  line-height: 1;
-}
-
-.avatar {
-  color: #dfd3a9;
-  box-shadow:
-    inset 0 -9px 0 rgba(13, 44, 46, 0.55),
-    inset 0 3px rgba(255, 255, 255, 0.15);
+.topbar-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .topbar-title {
@@ -138,41 +157,35 @@ button:focus-visible {
   font-size: clamp(0.95rem, 2vw, 1.25rem);
   font-weight: 900;
   letter-spacing: 0.05em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.55);
 }
 
 .status-pills {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.6rem;
 }
 
 .status-pill {
-  padding: 0.45rem 0.75rem;
+  padding: 0.4rem 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   border-radius: 999px;
-  background: rgba(2, 30, 40, 0.78);
+  background: rgba(3, 24, 35, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   color: #ffe39a;
   font-weight: 900;
-  font-size: 1.05rem;
+  font-size: 1rem;
+}
+
+.pill-icon-img {
+  width: 1.3em;
+  height: 1.3em;
+  object-fit: contain;
 }
 
 /* Home */
-
-.home-screen::before {
-  background:
-    linear-gradient(180deg, rgba(7, 56, 85, 0.1), rgba(7, 56, 85, 0.12)),
-    radial-gradient(circle at 50% 92%, #2f9eb3 0 13%, #19789d 14% 21%, transparent 22%),
-    linear-gradient(180deg, #0d6d9c 0%, #1a8cbd 42%, #4a9872 73%, #285437 100%);
-}
-
-.home-screen::after {
-  height: 45%;
-  bottom: -4%;
-  background:
-    radial-gradient(ellipse at 8% 90%, #143e25 0 27%, transparent 28%),
-    radial-gradient(ellipse at 25% 92%, #1d5b30 0 21%, transparent 22%),
-    radial-gradient(ellipse at 80% 92%, #164929 0 28%, transparent 29%),
-    linear-gradient(180deg, transparent 0 34%, #156a7b 35% 55%, #174830 56%);
-}
 
 .hero-title {
   position: relative;
@@ -215,26 +228,15 @@ button:focus-visible {
   text-shadow: 0 3px 5px rgba(0, 0, 0, 0.55);
 }
 
-.flying-eagle {
+.flying-eagle-img {
   position: absolute;
-  right: -3%;
-  top: 26%;
-  font-size: clamp(3.2rem, 7vw, 5.3rem);
-  transform: rotate(-7deg);
-  animation: eagle-float 4s ease-in-out infinite;
-}
-
-.wood-button {
-  border: 4px solid #55300f;
-  color: #fff0c7;
-  background:
-    linear-gradient(90deg, rgba(85, 48, 17, 0.75), transparent 22% 75%, rgba(85, 48, 17, 0.8)),
-    linear-gradient(180deg, #ad6b2f 0%, #81501f 58%, #643b15 100%);
-  box-shadow:
-    inset 0 3px rgba(255, 255, 255, 0.18),
-    inset 0 -5px rgba(65, 33, 8, 0.32),
-    0 8px 0 #3f220d,
-    0 14px 24px rgba(0, 0, 0, 0.34);
+  right: 4%;
+  top: 10%;
+  width: clamp(90px, 14vw, 160px);
+  filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.35));
+  animation: eagle-fly 10s linear infinite;
+  pointer-events: none;
+  will-change: transform;
 }
 
 .continue-button {
@@ -243,13 +245,13 @@ button:focus-visible {
   width: min(590px, 84vw);
   min-height: 96px;
   margin: clamp(1.5rem, 4vh, 2.4rem) auto 0;
-  border-radius: 20px;
   display: grid;
-  grid-template-columns: 28px 1fr 54px;
+  grid-template-columns: 1fr 54px;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.9rem 1.2rem;
+  padding: 0.9rem 1.6rem;
   transition: transform 160ms ease, filter 160ms ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.32);
 }
 
 .continue-button:hover {
@@ -260,6 +262,7 @@ button:focus-visible {
 .continue-button strong,
 .continue-button small {
   display: block;
+  text-align: left;
 }
 
 .continue-button strong {
@@ -272,17 +275,9 @@ button:focus-visible {
   font-weight: 700;
 }
 
-.wood-knot {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #5e3516;
-  box-shadow: inset 0 0 0 4px #805126;
-}
-
 .continue-arrow {
-  color: #ffe15a;
-  font-size: 2.7rem;
+  color: #6b3f1a;
+  font-size: 2.4rem;
   animation: arrow-bounce 1.2s ease-in-out infinite;
 }
 
@@ -301,59 +296,41 @@ button:focus-visible {
   width: 31%;
   min-height: 180px;
   padding: 1rem 0.7rem;
-  border: 4px solid rgba(2, 29, 39, 0.75);
-  border-radius: 20px;
-  color: #fff1cc;
+  border: none;
+  border-radius: 16px;
+  background-color: transparent;
+  background-image: url("/NativeWordQuest/assets/ui/panels/panel-parchment-large.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: #3f2b16;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.7rem;
-  box-shadow:
-    inset 0 3px rgba(255, 255, 255, 0.17),
-    0 7px 0 rgba(3, 25, 30, 0.55),
-    0 12px 24px rgba(0, 0, 0, 0.24);
+  gap: 0.6rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.28);
   transition: transform 150ms ease, filter 150ms ease;
 }
 
 .game-card:hover {
   transform: translateY(-5px) scale(1.02);
-  filter: brightness(1.1);
+  filter: brightness(1.05);
 }
 
 .game-card strong {
-  font-size: clamp(0.9rem, 2vw, 1.15rem);
+  font-size: clamp(0.85rem, 1.9vw, 1.1rem);
   line-height: 1.1;
 }
 
 .game-card small {
   font-weight: 900;
+  color: #6b4c2c;
 }
 
-.game-card-icon {
-  font-size: clamp(2.5rem, 5vw, 3.7rem);
-}
-
-.card-blue {
-  background: linear-gradient(180deg, #2d7ead, #174b7a);
-}
-
-.card-red {
-  background: linear-gradient(180deg, #ae5948, #71332c);
-}
-
-.card-green {
-  background: linear-gradient(180deg, #5b9461, #315a39);
-}
-
-.canoe-decoration {
-  position: absolute;
-  right: 8%;
-  bottom: 4%;
-  z-index: 1;
-  font-size: clamp(4rem, 10vw, 7rem);
-  transform: rotate(-9deg);
-  animation: canoe-float 3.6s ease-in-out infinite;
+.game-card-icon-img {
+  width: clamp(52px, 9vw, 74px);
+  height: clamp(52px, 9vw, 74px);
+  object-fit: contain;
 }
 
 .demo-note {
@@ -363,375 +340,469 @@ button:focus-visible {
   z-index: 8;
   margin: 0;
   font-size: 0.75rem;
-  color: rgba(246, 238, 208, 0.74);
+  color: rgba(246, 238, 208, 0.82);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 /* Shared stars */
 
 .stars {
-  white-space: nowrap;
-  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1em;
+  font-size: 1.15rem;
 }
 
-.filled-star {
-  color: #ffd03c;
-  text-shadow: 0 2px 2px rgba(71, 52, 7, 0.65);
-}
-
-.empty-star {
-  color: rgba(36, 51, 34, 0.55);
+.star-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .stars-large {
-  display: inline-flex;
-  gap: clamp(0.5rem, 2vw, 1rem);
-  font-size: clamp(4rem, 10vw, 7.7rem);
+  gap: clamp(0.3rem, 1.2vw, 0.7rem);
+  font-size: clamp(3.2rem, 8vw, 6rem);
 }
 
-.stars-large > span {
+.stars-large .star-icon {
+  filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.4));
+}
+
+.stars-large > .star-icon {
   animation: star-pop 620ms cubic-bezier(0.2, 0.9, 0.3, 1.25) backwards;
 }
 
-.stars-large > span:nth-child(2) {
+.stars-large > .star-icon:nth-child(2) {
   animation-delay: 180ms;
 }
 
-.stars-large > span:nth-child(3) {
+.stars-large > .star-icon:nth-child(3) {
   animation-delay: 360ms;
 }
 
-/* Map */
+/* =========================================================
+   Paw-print trail markers (world map + level select nodes)
+   ========================================================= */
 
-.map-screen::before {
-  background:
-    radial-gradient(circle at 67% 29%, rgba(255, 255, 255, 0.22), transparent 10%),
-    radial-gradient(ellipse at 68% 57%, #2b9fb5 0 6%, #1b7594 7% 11%, transparent 12%),
-    radial-gradient(ellipse at 55% 65%, #3c914c 0 23%, transparent 24%),
-    linear-gradient(180deg, #287ba7 0%, #6eb1b3 35%, #5b925e 65%, #2b5838 100%);
+.paw-token {
+  position: relative;
+  width: 78px;
+  height: 78px;
+  display: grid;
+  place-items: center;
+  background-image: url("/NativeWordQuest/assets/decorations/markers/paw-marker-pair.png");
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.35));
 }
 
-.map-screen::after {
+.paw-token-green {
+  background-position: 0% 0%;
+}
+
+.paw-token-gold {
+  background-position: 100% 0%;
+}
+
+.world-node-number,
+.footstep-number {
+  position: absolute;
+  right: -4px;
+  bottom: -4px;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 5px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #3a2411;
+  border: 2px solid #f6ecd0;
+  color: #ffe6a8;
+  font-size: 0.78rem;
+  font-weight: 1000;
+}
+
+.footstep-lock-img {
+  width: 42%;
   height: 42%;
-  background:
-    radial-gradient(ellipse at 35% 65%, #39672e 0 24%, transparent 25%),
-    radial-gradient(ellipse at 65% 80%, #214a2b 0 34%, transparent 35%),
-    linear-gradient(180deg, transparent 0 24%, rgba(34, 111, 111, 0.75) 25% 53%, #234a31 54%);
+  object-fit: contain;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.5));
 }
 
-.wood-sign {
+/* =========================================================
+   World map path
+   ========================================================= */
+
+.world-path-screen,
+.scalable-map-screen {
+  min-height: 100vh;
+  overflow-y: auto;
+  padding-bottom: 3rem;
+}
+
+.world-map-banner {
   position: relative;
   z-index: 5;
-  width: min(360px, 68vw);
+  width: min(340px, 76vw);
   margin: -0.2rem auto 0;
-  padding: 0.7rem 1rem;
-  border: 4px solid #4d2a12;
-  border-radius: 12px;
-  color: #ffe6a8;
+  display: grid;
+  place-items: center;
   text-align: center;
-  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: #fff3d6;
+  font-size: clamp(1.15rem, 3vw, 1.6rem);
   font-weight: 1000;
-  background: linear-gradient(180deg, #a6672f, #6d3a16);
-  box-shadow: 0 6px 0 #3e210f, 0 11px 19px rgba(0, 0, 0, 0.35);
+  letter-spacing: 0.06em;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.35));
 }
 
-.world-sidebar {
-  position: absolute;
-  z-index: 8;
-  left: clamp(12px, 3vw, 35px);
-  top: 155px;
-  width: min(230px, 24vw);
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+.world-path-canvas {
+  position: relative;
+  z-index: 4;
+  width: min(560px, 94vw);
+  margin: 2rem auto 3rem;
 }
 
-.world-tab {
-  min-height: 68px;
-  padding: 0.65rem 0.85rem;
-  border: 3px solid #203529;
-  border-radius: 13px;
-  color: #f6edcc;
-  background: rgba(36, 56, 44, 0.93);
-  box-shadow: inset 0 2px rgba(255, 255, 255, 0.1), 0 4px 0 rgba(12, 29, 18, 0.65);
-  text-align: left;
-  font-weight: 900;
-}
-
-.world-tab span,
-.world-tab small {
-  display: block;
-}
-
-.world-tab small {
-  margin-top: 0.12rem;
-  font-size: 0.8rem;
-}
-
-.completed-world {
-  background: linear-gradient(180deg, #638e35, #3a6124);
-}
-
-.active-world {
-  background: linear-gradient(180deg, #729d34, #3e6f22);
-  transform: translateX(8px);
-}
-
-.locked-world {
-  filter: grayscale(0.75) brightness(0.8);
-}
-
-.journey-map {
-  position: absolute;
-  z-index: 3;
-  inset: 130px 2vw 20px min(265px, 28vw);
-}
-
-.journey-line {
+.world-path-svg {
   position: absolute;
   inset: 0;
+  z-index: 1;
   width: 100%;
   height: 100%;
+  overflow: visible;
+  pointer-events: none;
 }
 
-.journey-line path {
+.world-path-earth {
   fill: none;
-  stroke: #f5edc8;
-  stroke-width: 16;
+  stroke: #fff7dd;
+  stroke-width: 8;
   stroke-linecap: round;
-  stroke-dasharray: 20 14;
-  filter: drop-shadow(0 3px 1px rgba(37, 53, 34, 0.75));
+  stroke-linejoin: round;
+  opacity: 0.55;
+  stroke-dasharray: 3 18;
+  filter: drop-shadow(0 3px 3px rgba(20, 15, 5, 0.4));
 }
 
-.map-level {
+.world-path-highlight {
+  display: none;
+}
+
+.world-node {
   position: absolute;
-  z-index: 5;
-  width: clamp(62px, 7vw, 84px);
-  height: clamp(62px, 7vw, 84px);
+  z-index: 3;
   transform: translate(-50%, -50%);
-  border-radius: 50%;
-  border: 5px solid #48651d;
-  color: #f9f3d7;
-  background: linear-gradient(180deg, #a9cb45, #689b1f);
-  box-shadow:
-    inset 0 3px rgba(255, 255, 255, 0.2),
-    0 7px 0 #3b5516,
-    0 12px 19px rgba(0, 0, 0, 0.34);
-  font-size: clamp(1.3rem, 3vw, 2rem);
-  font-weight: 1000;
-  transition: transform 150ms ease;
-}
-
-.map-level:not(:disabled):hover {
-  transform: translate(-50%, -50%) scale(1.12);
-}
-
-.current-map-level {
-  animation: current-level-pulse 1.25s ease-in-out infinite;
-}
-
-.locked-map-level {
-  border-color: #565e58;
-  color: #ddd9c8;
-  background: linear-gradient(180deg, #858c88, #505754);
-  box-shadow:
-    inset 0 3px rgba(255, 255, 255, 0.13),
-    0 7px 0 #343a37;
-  filter: grayscale(0.9);
-}
-
-.map-level-stars {
-  position: absolute;
-  left: 50%;
-  bottom: -31px;
-  transform: translateX(-50%);
-  font-size: clamp(0.7rem, 1.5vw, 1.1rem);
-}
-
-.map-progress-panel {
-  position: absolute;
-  left: 48%;
-  bottom: 2.5%;
-  min-width: 230px;
-  transform: translateX(-50%);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.9rem;
-  padding: 0.8rem 1.25rem;
-  border: 4px solid #4f2c13;
-  border-radius: 18px;
-  background: linear-gradient(180deg, #995a29, #613719);
-  color: #fff0c6;
-  box-shadow: 0 6px 0 #3d220f, 0 10px 19px rgba(0, 0, 0, 0.3);
+  gap: 0.4rem;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, filter 150ms ease;
 }
 
-.map-progress-panel strong,
-.map-progress-panel small {
-  display: block;
+.world-node:hover {
+  transform: translate(-50%, -50%) scale(1.06);
 }
 
-.map-progress-panel strong {
-  font-size: 1.5rem;
+.world-node-token {
+  width: clamp(72px, 16vw, 96px);
+  height: clamp(72px, 16vw, 96px);
 }
 
-.progress-star {
-  color: #ffd049;
-  font-size: 2.8rem;
-}
-
-.challenge-stone {
+.world-node-icon {
   position: absolute;
-  right: 4%;
-  bottom: 4%;
-  min-width: 150px;
-  padding: 0.9rem 1rem;
-  border: 4px solid #4b5451;
-  border-radius: 50% 50% 18px 18px;
-  background: linear-gradient(180deg, #848f8a, #505a55);
-  color: #eee9d5;
-  font-weight: 900;
-  box-shadow: 0 6px 0 #343a37;
+  left: -6px;
+  top: -6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fff8e6;
+  border: 2px solid #6b4226;
+  display: grid;
+  place-items: center;
+  font-size: 1.05rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
 }
 
-/* Level select */
-
-.level-screen::before,
-.collection-screen::before,
-.quiz-screen::before,
-.wordle-screen::before,
-.complete-screen::before {
-  background:
-    radial-gradient(circle at 72% 25%, rgba(62, 114, 137, 0.25), transparent 18%),
-    linear-gradient(180deg, #062a3e 0%, #07344a 45%, #0a3a4f 62%, #102d36 100%);
+.world-node-complete .world-node-token {
+  filter: drop-shadow(0 0 14px rgba(255, 214, 77, 0.75)) drop-shadow(0 6px 6px rgba(0, 0, 0, 0.3));
 }
 
-.level-screen::after,
-.collection-screen::after,
-.quiz-screen::after,
-.wordle-screen::after,
-.complete-screen::after {
-  bottom: -7%;
-  height: 36%;
-  background:
-    radial-gradient(ellipse at 20% 70%, #123822 0 34%, transparent 35%),
-    radial-gradient(ellipse at 70% 80%, #10311e 0 41%, transparent 42%),
-    linear-gradient(180deg, transparent 0 31%, #0f3140 32% 43%, #102d23 44%);
+.world-node-meta {
+  min-width: 130px;
+  padding: 0.35rem 0.6rem;
+  border-radius: 12px;
+  background: rgba(16, 32, 24, 0.68);
+  color: #f6ecd0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
 }
+
+.world-node-meta strong {
+  font-size: 0.85rem;
+  line-height: 1.15;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.world-node-meta small {
+  color: #cddcd2;
+  font-size: 0.7rem;
+}
+
+.world-node-meta .stars {
+  font-size: 0.85rem;
+}
+
+@media (max-width: 600px) {
+  .world-node-meta {
+    min-width: 108px;
+  }
+}
+
+/* =========================================================
+   Level select — curved forest trail
+   ========================================================= */
 
 .world-title {
+  position: relative;
+  z-index: 4;
   text-align: center;
   padding: 0.8rem 1rem 0;
 }
 
 .world-title h1 {
   margin: 0;
-  color: #eee7c8;
-  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  color: #f6f0d8;
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .world-title p {
   margin: 0.5rem 0 0;
   color: #f7eeca;
-  font-size: 1.3rem;
+  font-size: 1.15rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
-.level-grid {
+.forest-level-screen {
+  overflow-y: auto;
+}
+
+.forest-lesson-stack {
   position: relative;
-  z-index: 4;
-  width: min(850px, 92vw);
-  margin: 2rem auto 0;
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: clamp(0.7rem, 2vw, 1.2rem);
+  z-index: 5;
+  width: min(980px, 96vw);
+  margin: 1.6rem auto 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
 }
 
-.level-card {
-  min-height: 126px;
-  border: 4px solid #4a681d;
-  border-radius: 20px;
-  background: linear-gradient(180deg, #9bc43d, #5f8e20);
-  color: #f8f2d4;
-  display: grid;
-  place-items: center;
-  padding: 1rem 0.3rem;
-  box-shadow:
-    inset 0 3px rgba(255, 255, 255, 0.17),
-    0 7px 0 #354b14,
-    0 12px 20px rgba(0, 0, 0, 0.24);
-}
-
-.level-card strong {
-  font-size: clamp(1.6rem, 4vw, 2.3rem);
-}
-
-.level-card-current {
-  animation: level-card-pulse 1.3s ease-in-out infinite;
-}
-
-.level-card-locked {
-  border-color: #555f5b;
-  background: linear-gradient(180deg, #7f8783, #4c5451);
-  filter: grayscale(0.8);
-  box-shadow:
-    inset 0 3px rgba(255, 255, 255, 0.1),
-    0 7px 0 #303734;
-}
-
-.level-lock {
-  font-size: 1.5rem;
-}
-
-.challenge-card {
+.forest-lesson-panel {
   position: relative;
-  z-index: 4;
-  width: min(900px, 92vw);
-  margin: 2.4rem auto 0;
-  padding: 1rem 1.3rem;
-  min-height: 150px;
-  display: grid;
-  grid-template-columns: 110px 1fr auto;
-  align-items: center;
-  gap: 1.2rem;
-  border: 4px solid #44250f;
-  border-radius: 23px;
-  background: linear-gradient(180deg, #77451f, #4f2c15);
-  box-shadow: 0 8px 0 #321b0d, 0 14px 22px rgba(0, 0, 0, 0.32);
+  overflow: hidden;
+  padding: 0;
+  border-radius: 22px;
+  background: rgba(10, 26, 18, 0.42);
+  backdrop-filter: blur(1.5px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
 }
 
-.challenge-animal {
-  font-size: 5rem;
+.lesson-panel-locked {
+  filter: grayscale(0.55) brightness(0.75);
 }
 
-.challenge-copy h2 {
-  margin: 0;
-  color: #ffe097;
-}
-
-.challenge-copy p {
-  margin: 0.55rem 0 0;
-  color: #f4e8c7;
-}
-
-.play-button {
-  min-width: 140px;
-  min-height: 68px;
-  border: 4px solid #365b18;
-  border-radius: 16px;
-  background: linear-gradient(180deg, #99c93c, #53891d);
-  color: #fff8d9;
-  font-size: 1.5rem;
-  font-weight: 1000;
-  box-shadow: 0 5px 0 #2b4713;
-}
-
-/* Quiz */
-
-.quiz-hearts {
-  position: absolute;
+.forest-lesson-header {
+  position: relative;
   z-index: 20;
-  right: 2.5rem;
-  top: 91px;
-  font-size: 1.45rem;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  background: linear-gradient(180deg, rgba(58, 34, 16, 0.92), rgba(38, 22, 11, 0.9));
 }
+
+.lesson-header span,
+.lesson-header strong {
+  display: block;
+}
+
+.lesson-header > div > span {
+  font-size: 1rem;
+  font-weight: 1000;
+  letter-spacing: 0.09em;
+  color: #f7e6b6;
+}
+
+.lesson-header > div > strong {
+  margin-top: 0.2rem;
+  font-size: 0.86rem;
+  color: #eadcbc;
+}
+
+.lesson-state {
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(5, 31, 35, 0.55);
+  color: #f7e6b6;
+  font-size: 0.76rem;
+  font-weight: 1000;
+}
+
+.forest-trail-canvas {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+.curved-forest-trail {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.trail-earth {
+  fill: none;
+  stroke: #d9b673;
+  stroke-width: 46;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.32;
+  filter: drop-shadow(0 4px 3px rgba(30, 26, 14, 0.35));
+}
+
+.trail-highlight {
+  fill: none;
+  stroke: rgba(255, 248, 220, 0.55);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 6 16;
+}
+
+.forest-bank {
+  position: absolute;
+  z-index: 4;
+  top: 20px;
+  bottom: 20px;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.forest-bank-left {
+  left: 0;
+}
+
+.forest-bank-right {
+  right: 0;
+}
+
+.forest-bank-tree {
+  display: block;
+  max-width: clamp(50px, 8vw, 84px);
+  max-height: clamp(70px, 12vw, 120px);
+  object-fit: contain;
+  filter: drop-shadow(0 6px 5px rgba(0, 0, 0, 0.4));
+}
+
+.forest-bank-left .forest-bank-tree:nth-child(even),
+.forest-bank-right .forest-bank-tree:nth-child(odd) {
+  transform: scale(0.82) translateX(12px);
+  opacity: 0.85;
+}
+
+.trail-footstep {
+  position: absolute;
+  z-index: 12;
+  transform-origin: center center;
+  translate: -50% -50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 150ms ease, filter 150ms ease;
+}
+
+.trail-footstep:hover:not(:disabled) {
+  scale: 1.05;
+}
+
+.trail-footstep:disabled {
+  cursor: not-allowed;
+}
+
+.footstep-locked .paw-token {
+  filter: grayscale(0.7) brightness(0.75);
+}
+
+.footstep-current .paw-token {
+  animation: footstepPulse 1.3s infinite ease-in-out;
+}
+
+.footstep-meta,
+.trail-footstep-meta {
+  min-width: 120px;
+  padding: 0.3rem 0.5rem;
+  border-radius: 12px;
+  background: rgba(16, 42, 31, 0.72);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.category-mini-label {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #f1e6c3;
+  font-size: 0.63rem;
+  font-weight: 800;
+}
+
+@media (max-width: 700px) {
+  .forest-bank {
+    width: 16%;
+    opacity: 0.6;
+  }
+
+  .trail-earth {
+    stroke-width: 34;
+  }
+
+  .trail-footstep-meta {
+    min-width: 94px;
+  }
+}
+
+/* =========================================================
+   Quiz (recognition)
+   ========================================================= */
 
 .quiz-content {
   position: relative;
@@ -746,6 +817,7 @@ button:focus-visible {
   text-align: center;
   color: #f7edcb;
   font-size: clamp(1.4rem, 3vw, 2rem);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .word-parchment {
@@ -756,13 +828,13 @@ button:focus-visible {
   display: grid;
   place-items: center;
   padding: 1.2rem 5rem;
-  border: 4px solid #8f6934;
-  border-radius: 18px;
+  border: none;
+  border-radius: 14px;
+  background-color: transparent;
+  background-image: url("/NativeWordQuest/assets/ui/panels/panel-parchment-large.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   color: #3d2b1e;
-  background:
-    radial-gradient(circle at 15% 50%, rgba(145, 93, 40, 0.14), transparent 9%),
-    radial-gradient(circle at 85% 60%, rgba(145, 93, 40, 0.13), transparent 8%),
-    linear-gradient(180deg, #f4dda7, #e7c681);
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.38);
 }
 
@@ -784,8 +856,9 @@ button:focus-visible {
 .word-hint {
   margin: 0.85rem 0 0;
   text-align: center;
-  color: #c7d5cf;
+  color: #d5e0da;
   font-style: italic;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 .answer-grid {
@@ -798,9 +871,12 @@ button:focus-visible {
 .answer-button {
   min-height: 76px;
   padding: 1rem 1.25rem;
-  border: 4px solid #9b7139;
-  border-radius: 15px;
-  background: linear-gradient(180deg, #f0ddb1, #dfc18a);
+  border: none;
+  border-radius: 12px;
+  background-color: transparent;
+  background-image: url("/NativeWordQuest/assets/ui/panels/panel-parchment-large.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   color: #402f20;
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -808,7 +884,7 @@ button:focus-visible {
   gap: 0.8rem;
   text-align: left;
   font-size: 1.15rem;
-  box-shadow: 0 5px 0 #765127;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.28);
   transition: transform 120ms ease;
 }
 
@@ -821,18 +897,22 @@ button:focus-visible {
 }
 
 .answer-correct {
-  border-color: #4e7722;
   color: #f8f5db;
-  background: linear-gradient(180deg, #8ab936, #4e8421);
-  box-shadow: 0 5px 0 #315716;
+  background-color: transparent;
+  background-image:
+    linear-gradient(rgba(69, 138, 58, 0.78), rgba(69, 138, 58, 0.78)),
+    url("/NativeWordQuest/assets/ui/panels/panel-parchment-large.png");
+  background-size: 100% 100%, 100% 100%;
   animation: correct-pop 320ms ease;
 }
 
 .answer-wrong {
-  border-color: #7b2a25;
   color: #fff1dc;
-  background: linear-gradient(180deg, #b64e43, #86352f);
-  box-shadow: 0 5px 0 #5c211e;
+  background-color: transparent;
+  background-image:
+    linear-gradient(rgba(163, 58, 48, 0.78), rgba(163, 58, 48, 0.78)),
+    url("/NativeWordQuest/assets/ui/panels/panel-parchment-large.png");
+  background-size: 100% 100%, 100% 100%;
   animation: wrong-shake 300ms ease;
 }
 
@@ -866,10 +946,12 @@ button:focus-visible {
 
 .correct-panel strong {
   font-size: 1.65rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .correct-panel span {
   font-size: 1.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .correct-panel small {
@@ -880,16 +962,19 @@ button:focus-visible {
 .correct-panel button {
   min-width: 210px;
   padding: 1rem 1.2rem;
-  border: 4px solid #315a17;
-  border-radius: 16px;
-  background: linear-gradient(180deg, #8bb83c, #4e8522);
-  color: #fff6d2;
+  border: none;
+  background-color: transparent;
+  background-image: url("/NativeWordQuest/assets/ui/buttons/button-green-wide.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: #1f3a10;
   font-size: 1.08rem;
   font-weight: 900;
-  box-shadow: 0 5px 0 #294714;
 }
 
-/* Wordle */
+/* =========================================================
+   Wordle (recall)
+   ========================================================= */
 
 .wordle-content {
   position: relative;
@@ -904,16 +989,28 @@ button:focus-visible {
   margin: 0.8rem 0 0.25rem;
   color: #f6eac8;
   font-size: clamp(1.25rem, 3vw, 1.8rem);
-}
-
-.wordle-content h1 strong {
-  color: #ffd04c;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .wordle-hint {
   margin: 0.2rem 0 0.8rem;
-  color: #a9bdbb;
+  color: #cfdbd8;
   font-size: 0.9rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.recall-hint {
+  width: fit-content;
+  margin: 0.55rem auto 0.65rem;
+  padding: 0.6rem 1.4rem;
+  border: none;
+  background-color: transparent;
+  background-image: url("/NativeWordQuest/assets/ui/panels/panel-parchment-large.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: #3f2f20;
+  font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+  font-weight: 900;
 }
 
 .wordle-grid {
@@ -966,6 +1063,7 @@ button:focus-visible {
   min-height: 28px;
   color: #ffe078;
   font-weight: 800;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 .keyboard {
@@ -1012,11 +1110,14 @@ button:focus-visible {
 
 .timer {
   margin-top: 0.7rem;
-  color: #a7babd;
+  color: #c4d2d0;
   font-size: 0.85rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-/* Complete */
+/* =========================================================
+   Level complete
+   ========================================================= */
 
 .complete-screen {
   display: grid;
@@ -1031,13 +1132,15 @@ button:focus-visible {
   padding: 1.8rem 1rem 2.4rem;
 }
 
-.complete-content h1 {
-  margin: 0;
-  color: #f3d18a;
-  font-size: clamp(2.6rem, 8vw, 5.4rem);
-  text-shadow:
-    0 5px 0 #65350f,
-    0 10px 18px rgba(0, 0, 0, 0.58);
+.complete-banner {
+  width: min(440px, 88vw);
+  margin: 0 auto;
+  color: #fff3d6;
+  font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+  font-weight: 1000;
+  letter-spacing: 0.04em;
+  text-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
+  filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.35));
 }
 
 .complete-content h2 {
@@ -1053,15 +1156,35 @@ button:focus-visible {
   font-size: clamp(1.5rem, 3vw, 2rem);
 }
 
+.complete-feather {
+  position: absolute;
+  top: 3rem;
+  width: clamp(70px, 9vw, 130px);
+  z-index: 2;
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.45));
+}
+
+.complete-feather-left {
+  left: clamp(0.5rem, 5vw, 5rem);
+  transform: rotate(-8deg);
+}
+
+.complete-feather-right {
+  right: clamp(0.5rem, 5vw, 5rem);
+  transform: scaleX(-1) rotate(-8deg);
+}
+
 .score-details {
-  width: min(620px, 92vw);
+  width: min(760px, 94vw);
   margin: 1.3rem auto;
-  padding: 0.9rem;
+  padding: 1rem 0.6rem;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid rgba(235, 229, 200, 0.15);
-  border-bottom: 1px solid rgba(235, 229, 200, 0.15);
-  background: rgba(1, 23, 35, 0.4);
+  grid-template-columns: repeat(4, 1fr);
+  border: none;
+  background-color: transparent;
+  background-image: url("/NativeWordQuest/assets/ui/panels/panel-parchment-large.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 .score-details small,
@@ -1070,13 +1193,21 @@ button:focus-visible {
 }
 
 .score-details small {
-  color: #e6dec1;
+  color: #6b4c2c;
+  font-weight: 800;
 }
 
 .score-details strong {
   margin-top: 0.25rem;
-  color: #ffd58a;
+  color: #8a3f18;
   font-size: 1.7rem;
+}
+
+@media (max-width: 650px) {
+  .score-details {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
 }
 
 .complete-actions {
@@ -1089,24 +1220,8 @@ button:focus-visible {
 .complete-actions button {
   min-width: 170px;
   padding: 1rem 1.15rem;
-  border: 4px solid rgba(36, 47, 37, 0.72);
-  border-radius: 14px;
-  color: #fff5d3;
   font-size: 1.03rem;
-  font-weight: 900;
-  box-shadow: 0 5px 0 rgba(18, 28, 23, 0.75);
-}
-
-.action-replay {
-  background: linear-gradient(180deg, #9b671e, #704415);
-}
-
-.action-next {
-  background: linear-gradient(180deg, #83ac37, #4f7f22);
-}
-
-.action-map {
-  background: linear-gradient(180deg, #3477a0, #1f5277);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .celebration-particles i {
@@ -1123,7 +1238,15 @@ button:focus-visible {
   animation-delay: calc(var(--i) * -85ms);
 }
 
-/* Collection */
+/* =========================================================
+   Word collection
+   ========================================================= */
+
+.collection-screen {
+  background:
+    radial-gradient(circle at 72% 25%, rgba(62, 114, 137, 0.25), transparent 18%),
+    linear-gradient(180deg, #062a3e 0%, #07344a 45%, #0a3a4f 62%, #102d36 100%);
+}
 
 .collection-title {
   position: relative;
@@ -1144,6 +1267,22 @@ button:focus-visible {
   color: #b7cbc4;
 }
 
+.collection-search {
+  width: min(560px, 88vw);
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border: 2px solid rgba(231, 214, 165, 0.32);
+  border-radius: 999px;
+  outline: none;
+  color: #f6edcd;
+  background: rgba(3, 29, 40, 0.7);
+  font: inherit;
+}
+
+.collection-search::placeholder {
+  color: #aebdb8;
+}
+
 .collection-grid {
   position: relative;
   z-index: 4;
@@ -1155,18 +1294,18 @@ button:focus-visible {
 }
 
 .word-collection-card {
-  min-height: 230px;
-  padding: 1rem 0.75rem;
-  border: 4px solid #79592c;
-  border-radius: 20px;
+  position: relative;
+  min-height: 200px;
+  padding: 1rem 0.9rem;
+  border: none;
+  border-radius: 14px;
+  background-color: transparent;
+  background-image: url("/NativeWordQuest/assets/ui/panels/panel-parchment-large.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   color: #3f2d1e;
   text-align: center;
-  background: linear-gradient(180deg, #f1dca9, #d6b779);
-  box-shadow: 0 7px 0 #5b3d1e, 0 12px 20px rgba(0, 0, 0, 0.28);
-}
-
-.collection-icon {
-  font-size: 4rem;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.3);
 }
 
 .word-collection-card h2 {
@@ -1178,32 +1317,93 @@ button:focus-visible {
 }
 
 .collection-locked {
-  filter: grayscale(0.85) brightness(0.73);
+  filter: grayscale(0.85) brightness(0.78);
 }
 
-.collection-lock {
-  font-size: 2rem;
+.collection-lock-img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
 }
 
-/* Animations */
+.collection-world-chip {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(75, 52, 24, 0.22);
+  font-size: 0.67rem;
+  font-weight: 1000;
+}
 
-@keyframes eagle-float {
-  0%,
+.completion-category {
+  color: #dfe8e3;
+  font-size: 0.9rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 900px) {
+  .collection-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .collection-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Learning sequence labels */
+
+.learning-step-label {
+  width: fit-content;
+  margin: 0.25rem auto 0.85rem;
+  padding: 0.45rem 0.85rem;
+  border: 2px solid rgba(246, 230, 172, 0.35);
+  border-radius: 999px;
+  color: #f7dc83;
+  background: rgba(4, 28, 40, 0.72);
+  font-size: 0.78rem;
+  font-weight: 1000;
+  letter-spacing: 0.12em;
+}
+
+.mastery-message {
+  margin: 0.8rem auto 1.2rem;
+  color: #f4e7c1;
+  font-weight: 800;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* =========================================================
+   Animations
+   ========================================================= */
+
+@keyframes eagle-fly {
+  0% {
+    transform: translate(25vw, 10px) rotate(-3deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  30% {
+    transform: translate(-30vw, -18px) rotate(-8deg);
+  }
+  55% {
+    transform: translate(-95vw, 22px) rotate(4deg);
+  }
+  80% {
+    transform: translate(-155vw, -6px) rotate(-5deg);
+  }
+  92% {
+    opacity: 1;
+  }
   100% {
-    transform: translateY(0) rotate(-7deg);
-  }
-  50% {
-    transform: translateY(-12px) rotate(-3deg);
-  }
-}
-
-@keyframes canoe-float {
-  0%,
-  100% {
-    transform: translateY(0) rotate(-9deg);
-  }
-  50% {
-    transform: translateY(-8px) rotate(-7deg);
+    transform: translate(-185vw, 4px) rotate(-4deg);
+    opacity: 0;
   }
 }
 
@@ -1238,25 +1438,15 @@ button:focus-visible {
   }
 }
 
-@keyframes current-level-pulse {
-  0%,
-  100% {
-    transform: translate(-50%, -50%) scale(1);
+@keyframes footstepPulse {
+  0% {
+    transform: scale(1);
   }
   50% {
-    transform: translate(-50%, -50%) scale(1.1);
+    transform: scale(1.08);
   }
-}
-
-@keyframes level-card-pulse {
-  0%,
   100% {
     transform: scale(1);
-    filter: brightness(1);
-  }
-  50% {
-    transform: scale(1.04);
-    filter: brightness(1.13);
   }
 }
 
@@ -1305,38 +1495,9 @@ button:focus-visible {
   }
 }
 
-/* Responsive */
-
-@media (max-width: 820px) {
-  .world-sidebar {
-    display: none;
-  }
-
-  .journey-map {
-    left: 2vw;
-  }
-
-  .level-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .challenge-card {
-    grid-template-columns: 78px 1fr;
-  }
-
-  .challenge-animal {
-    font-size: 4rem;
-  }
-
-  .play-button {
-    grid-column: 1 / -1;
-    width: 100%;
-  }
-
-  .collection-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+/* =========================================================
+   Responsive
+   ========================================================= */
 
 @media (max-width: 600px) {
   .topbar {
@@ -1357,10 +1518,10 @@ button:focus-visible {
     padding-top: 0.4rem;
   }
 
-  .flying-eagle {
-    right: 1%;
-    top: 37%;
-    opacity: 0.78;
+  .flying-eagle-img {
+    right: 2%;
+    top: 8%;
+    width: clamp(70px, 20vw, 110px);
   }
 
   .continue-button {
@@ -1378,15 +1539,11 @@ button:focus-visible {
   }
 
   .game-card strong {
-    font-size: 0.78rem;
+    font-size: 0.75rem;
   }
 
   .game-card small {
-    font-size: 0.68rem;
-  }
-
-  .level-grid {
-    grid-template-columns: repeat(2, 1fr);
+    font-size: 0.66rem;
   }
 
   .answer-grid {
@@ -1401,18 +1558,8 @@ button:focus-visible {
     width: 100%;
   }
 
-  .quiz-hearts {
-    position: static;
-    text-align: center;
-    margin-top: 0.3rem;
-  }
-
   .word-parchment {
     padding-inline: 3rem;
-  }
-
-  .collection-grid {
-    grid-template-columns: 1fr;
   }
 
   .score-details {
@@ -1421,677 +1568,5 @@ button:focus-visible {
 
   .score-details strong {
     font-size: 1.3rem;
-  }
-
-  .map-progress-panel {
-    left: 42%;
-    min-width: 185px;
-  }
-
-  .challenge-stone {
-    right: 1%;
-    min-width: 116px;
-    font-size: 0.75rem;
-  }
-}
-
-
-/* Learning sequence labels */
-
-.learning-step-label {
-  width: fit-content;
-  margin: 0.25rem auto 0.85rem;
-  padding: 0.45rem 0.85rem;
-  border: 2px solid rgba(246, 230, 172, 0.35);
-  border-radius: 999px;
-  color: #f7dc83;
-  background: rgba(4, 28, 40, 0.72);
-  font-size: 0.78rem;
-  font-weight: 1000;
-  letter-spacing: 0.12em;
-}
-
-.mastery-message {
-  margin: 0.8rem auto 1.2rem;
-  color: #f4e7c1;
-  font-weight: 800;
-}
-
-.complete-screen .score-details {
-  width: min(760px, 94vw);
-  grid-template-columns: repeat(4, 1fr);
-}
-
-@media (max-width: 650px) {
-  .complete-screen .score-details {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
-  }
-}
-
-
-.recall-hint {
-  width: fit-content;
-  margin: 0.55rem auto 0.65rem;
-  padding: 0.65rem 1.1rem;
-  border: 3px solid #8c6a32;
-  border-radius: 14px;
-  color: #3f2f20;
-  background: linear-gradient(180deg, #f1dca6, #dabb78);
-  box-shadow: 0 4px 0 #6d4b25;
-  font-size: clamp(1.05rem, 2.5vw, 1.35rem);
-  font-weight: 900;
-}
-
-
-/* =========================================================
-   Scalable TSV-driven Worlds / Lessons
-   ========================================================= */
-
-.scalable-map-screen {
-  min-height: 100vh;
-  overflow-y: auto;
-  padding-bottom: 3rem;
-}
-
-.dynamic-world-grid {
-  position: relative;
-  z-index: 5;
-  width: min(1120px, 94vw);
-  margin: 2.2rem auto 0;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.15rem;
-}
-
-.dynamic-world-card {
-  min-height: 230px;
-  padding: 1rem;
-  border: 4px solid #4d3418;
-  border-radius: 24px;
-  color: #f8efcf;
-  background: linear-gradient(180deg, rgba(108, 148, 59, 0.96), rgba(48, 88, 39, 0.97));
-  box-shadow:
-    inset 0 3px rgba(255, 255, 255, 0.15),
-    0 7px 0 #2b4a23,
-    0 14px 22px rgba(0, 0, 0, 0.28);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  transition: transform 150ms ease, filter 150ms ease;
-}
-
-.dynamic-world-card:hover {
-  transform: translateY(-5px);
-  filter: brightness(1.08);
-}
-
-.world-number {
-  align-self: flex-start;
-  padding: 0.25rem 0.55rem;
-  border-radius: 999px;
-  background: rgba(3, 30, 35, 0.48);
-  font-size: 0.74rem;
-  font-weight: 1000;
-  letter-spacing: 0.08em;
-}
-
-.world-card-icon {
-  margin: 0.55rem 0;
-  font-size: 3.7rem;
-}
-
-.dynamic-world-card strong {
-  font-size: 1.35rem;
-}
-
-.world-word-count {
-  margin-top: 0.45rem;
-  color: #e9e2c4;
-  font-size: 0.85rem;
-}
-
-.world-progress-track {
-  width: 92%;
-  height: 13px;
-  margin-top: auto;
-  border-radius: 999px;
-  overflow: hidden;
-  background: rgba(8, 38, 35, 0.58);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.world-progress-track span {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, #f0ba2f, #ffe276);
-}
-
-.dynamic-world-card small {
-  margin-top: 0.45rem;
-  color: #f1e8c6;
-}
-
-.lesson-stack {
-  position: relative;
-  z-index: 5;
-  width: min(1040px, 94vw);
-  margin: 1.6rem auto 3rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.35rem;
-}
-
-.lesson-panel {
-  padding: 1rem 1.15rem 1.3rem;
-  border: 4px solid rgba(100, 73, 34, 0.9);
-  border-radius: 23px;
-  background: linear-gradient(
-    180deg,
-    rgba(113, 68, 31, 0.96),
-    rgba(68, 40, 21, 0.97)
-  );
-  box-shadow: 0 7px 0 rgba(44, 26, 13, 0.9);
-}
-
-.lesson-panel-locked {
-  filter: grayscale(0.72) brightness(0.72);
-}
-
-.lesson-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  color: #f7e6b6;
-}
-
-.lesson-header span,
-.lesson-header strong {
-  display: block;
-}
-
-.lesson-header > div > span {
-  font-size: 1rem;
-  font-weight: 1000;
-  letter-spacing: 0.09em;
-}
-
-.lesson-header > div > strong {
-  margin-top: 0.2rem;
-  font-size: 0.86rem;
-  color: #eadcbc;
-}
-
-.lesson-state {
-  padding: 0.45rem 0.7rem;
-  border-radius: 999px;
-  background: rgba(5, 31, 35, 0.52);
-  font-size: 0.76rem;
-  font-weight: 1000;
-}
-
-.dynamic-level-grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 0.9rem;
-}
-
-.category-mini-label {
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: #e9e2c4;
-  font-size: 0.63rem;
-  font-weight: 800;
-}
-
-.collection-search {
-  width: min(560px, 88vw);
-  margin-top: 1rem;
-  padding: 0.85rem 1rem;
-  border: 3px solid rgba(231, 214, 165, 0.32);
-  border-radius: 999px;
-  outline: none;
-  color: #f6edcd;
-  background: rgba(3, 29, 40, 0.7);
-  font: inherit;
-}
-
-.collection-search::placeholder {
-  color: #aebdb8;
-}
-
-.scalable-collection-grid .word-collection-card {
-  position: relative;
-  min-height: 180px;
-}
-
-.collection-world-chip {
-  position: absolute;
-  top: 0.6rem;
-  right: 0.6rem;
-  padding: 0.25rem 0.45rem;
-  border-radius: 999px;
-  background: rgba(75, 52, 24, 0.16);
-  font-size: 0.67rem;
-  font-weight: 1000;
-}
-
-.completion-category {
-  color: #c5d2ca;
-  font-size: 0.9rem;
-}
-
-@media (max-width: 900px) {
-  .dynamic-world-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .dynamic-level-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 620px) {
-  .dynamic-world-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .dynamic-level-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .lesson-header {
-    align-items: flex-start;
-  }
-}
-
-
-/* =========================================================
-   Footstep trail level selector
-   ========================================================= */
-
-.footstep-trail-grid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-}
-
-.footstep-track-item {
-  position: relative;
-  width: min(360px, 92vw);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.footstep-level {
-  background: transparent;
-  border: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  transition: transform 150ms ease, filter 150ms ease;
-}
-
-.footstep-level:hover {
-  filter: brightness(1.06);
-}
-
-.footstep-level:disabled {
-  cursor: not-allowed;
-}
-
-.step-left .footstep-level {
-  transform: translateX(-54px) rotate(-10deg);
-}
-
-.step-right .footstep-level {
-  transform: translateX(54px) rotate(10deg);
-}
-
-.step-left .footstep-level:hover {
-  transform: translateX(-54px) rotate(-10deg) scale(1.035);
-}
-
-.step-right .footstep-level:hover {
-  transform: translateX(54px) rotate(10deg) scale(1.035);
-}
-
-.footstep-shape {
-  position: relative;
-  width: 82px;
-  height: 112px;
-  border-radius: 48% 48% 44% 44% / 34% 34% 64% 64%;
-  border: 3px solid #6c4724;
-  background: linear-gradient(180deg, #d8b36a, #b9803b);
-  box-shadow:
-    inset 0 3px rgba(255, 255, 255, 0.2),
-    0 6px 0 #7b5327,
-    0 12px 18px rgba(0, 0, 0, 0.22);
-}
-
-.toe {
-  position: absolute;
-  border-radius: 50%;
-  border: 2px solid #6c4724;
-  background: linear-gradient(180deg, #d8b36a, #b9803b);
-}
-
-.toe-1 {
-  width: 18px;
-  height: 18px;
-  top: -14px;
-  left: 18px;
-}
-
-.toe-2 {
-  width: 16px;
-  height: 16px;
-  top: -8px;
-  left: 38px;
-}
-
-.toe-3 {
-  width: 14px;
-  height: 14px;
-  top: 8px;
-  left: 54px;
-}
-
-.toe-4 {
-  width: 12px;
-  height: 12px;
-  top: 28px;
-  left: 60px;
-}
-
-.footstep-number {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  color: #2f1d0e;
-  font-size: 1.35rem;
-  font-weight: 1000;
-}
-
-.footstep-lock {
-  position: absolute;
-  right: 8px;
-  bottom: 8px;
-  font-size: 1.08rem;
-}
-
-.footstep-meta {
-  margin-top: 0.45rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.15rem;
-}
-
-.footstep-connector {
-  width: 0;
-  height: 34px;
-  margin: 0.15rem 0 0.4rem;
-  border-left: 5px dotted rgba(239, 220, 169, 0.8);
-  opacity: 0.85;
-}
-
-.step-left .footstep-connector {
-  transform: translateX(-18px);
-}
-
-.step-right .footstep-connector {
-  transform: translateX(18px);
-}
-
-.footstep-locked .footstep-shape,
-.footstep-locked .toe {
-  border-color: #474747;
-  background: linear-gradient(180deg, #8d8d8d, #626262);
-  box-shadow:
-    inset 0 3px rgba(255, 255, 255, 0.12),
-    0 6px 0 #3d3d3d,
-    0 10px 18px rgba(0, 0, 0, 0.22);
-}
-
-.footstep-locked {
-  filter: grayscale(0.45) brightness(0.88);
-}
-
-.footstep-current .footstep-shape,
-.footstep-current .toe {
-  background: linear-gradient(180deg, #f8df87, #e2a92e);
-  box-shadow:
-    inset 0 3px rgba(255, 255, 255, 0.28),
-    0 6px 0 #9a6b13,
-    0 0 16px rgba(255, 214, 77, 0.45);
-}
-
-.footstep-current .footstep-shape {
-  animation: footstepPulse 1.3s infinite ease-in-out;
-}
-
-@keyframes footstepPulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@media (max-width: 620px) {
-  .footstep-track-item {
-    width: min(280px, 94vw);
-  }
-
-  .step-left .footstep-level {
-    transform: translateX(-28px) rotate(-8deg);
-  }
-
-  .step-right .footstep-level {
-    transform: translateX(28px) rotate(8deg);
-  }
-
-  .step-left .footstep-level:hover {
-    transform: translateX(-28px) rotate(-8deg) scale(1.03);
-  }
-
-  .step-right .footstep-level:hover {
-    transform: translateX(28px) rotate(8deg) scale(1.03);
-  }
-
-  .step-left .footstep-connector {
-    transform: translateX(-10px);
-  }
-
-  .step-right .footstep-connector {
-    transform: translateX(10px);
-  }
-}
-
-
-/* =========================================================
-   Curved forest trail for footstep levels
-   ========================================================= */
-
-.forest-level-screen {
-  overflow-y: auto;
-  background:
-    radial-gradient(circle at 50% 18%, rgba(121, 180, 174, 0.22), transparent 18%),
-    linear-gradient(180deg, #073349 0%, #0d4c4a 40%, #174732 74%, #102e20 100%);
-}
-
-.forest-level-screen::after {
-  opacity: 0.38;
-}
-
-.forest-lesson-stack {
-  width: min(980px, 96vw);
-}
-
-.forest-lesson-panel {
-  position: relative;
-  overflow: hidden;
-  padding: 0;
-  border-color: rgba(65, 73, 37, 0.95);
-  background:
-    radial-gradient(ellipse at 10% 15%, rgba(63, 104, 46, 0.96) 0 16%, transparent 17%),
-    radial-gradient(ellipse at 92% 23%, rgba(55, 95, 42, 0.96) 0 18%, transparent 19%),
-    radial-gradient(ellipse at 12% 72%, rgba(43, 83, 36, 0.96) 0 22%, transparent 23%),
-    radial-gradient(ellipse at 90% 80%, rgba(40, 78, 34, 0.96) 0 22%, transparent 23%),
-    linear-gradient(180deg, #557a42 0%, #385b35 47%, #29482d 100%);
-  box-shadow:
-    inset 0 0 60px rgba(8, 31, 18, 0.45),
-    0 8px 0 #24371e,
-    0 15px 25px rgba(0, 0, 0, 0.32);
-}
-
-.forest-lesson-header {
-  position: relative;
-  z-index: 20;
-  margin: 0;
-  padding: 1rem 1.2rem;
-  background: linear-gradient(180deg, rgba(70, 42, 20, 0.96), rgba(52, 31, 17, 0.94));
-  border-bottom: 3px solid rgba(42, 58, 28, 0.9);
-}
-
-.forest-trail-canvas {
-  position: relative;
-  width: 100%;
-  min-height: 420px;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 50% 15%, rgba(221, 232, 185, 0.11), transparent 14%),
-    repeating-linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.018) 0 2px,
-      transparent 2px 26px
-    );
-}
-
-.curved-forest-trail {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  pointer-events: none;
-}
-
-.trail-earth {
-  fill: none;
-  stroke: #9b7644;
-  stroke-width: 118;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: 0.9;
-  filter: drop-shadow(0 8px 5px rgba(30, 26, 14, 0.42));
-}
-
-.trail-highlight {
-  fill: none;
-  stroke: rgba(239, 218, 159, 0.72);
-  stroke-width: 7;
-  stroke-linecap: round;
-  stroke-dasharray: 8 17;
-}
-
-.forest-bank {
-  position: absolute;
-  z-index: 4;
-  top: 20px;
-  bottom: 20px;
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  pointer-events: none;
-  opacity: 0.92;
-}
-
-.forest-bank-left {
-  left: 0;
-}
-
-.forest-bank-right {
-  right: 0;
-}
-
-.forest-bank span {
-  display: block;
-  font-size: clamp(2.8rem, 6vw, 5rem);
-  filter: drop-shadow(0 6px 4px rgba(0, 0, 0, 0.32));
-}
-
-.forest-bank-left span:nth-child(even),
-.forest-bank-right span:nth-child(odd) {
-  transform: scale(0.82) translateX(12px);
-  opacity: 0.82;
-}
-
-.trail-footstep {
-  position: absolute;
-  z-index: 12;
-  transform-origin: center center;
-  translate: -50% -50%;
-}
-
-.trail-footstep.step-left {
-  rotate: -11deg;
-}
-
-.trail-footstep.step-right {
-  rotate: 11deg;
-}
-
-.trail-footstep:hover:not(:disabled) {
-  scale: 1.04;
-}
-
-.trail-footstep-meta {
-  min-width: 120px;
-  padding: 0.25rem 0.45rem;
-  border-radius: 12px;
-  background: rgba(16, 42, 31, 0.72);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.22);
-}
-
-.trail-footstep .category-mini-label {
-  color: #f1e6c3;
-}
-
-@media (max-width: 700px) {
-  .forest-bank {
-    width: 16%;
-    opacity: 0.68;
-  }
-
-  .forest-bank span {
-    font-size: 2.7rem;
-  }
-
-  .trail-earth {
-    stroke-width: 98;
-  }
-
-  .trail-footstep-meta {
-    min-width: 94px;
   }
 }

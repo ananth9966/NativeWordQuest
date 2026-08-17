@@ -1,0 +1,657 @@
+{
+  "version": "1.0.0",
+  "project": "NativeWordQuest",
+  "notes": [
+    "All paths are relative to public/assets.",
+    "Use import.meta.env.BASE_URL when referencing public assets from React/Vite.",
+    "SceneBackground defaults to object-fit: contain to avoid cropping."
+  ],
+  "backgrounds": {
+    "homeLakesideTipiDay": {
+      "path": "backgrounds/home/home-lakeside-tipi-day.webp",
+      "role": "Home screen / bright daytime",
+      "width": 1448,
+      "height": 1086,
+      "format": "webp",
+      "source": "peaceful_lakeside_teepee_retreat.png"
+    },
+    "homeGoldenHour": {
+      "path": "backgrounds/home/home-lakeside-golden-hour.webp",
+      "role": "Home screen / warm golden-hour alternative",
+      "width": 1448,
+      "height": 1086,
+      "format": "webp",
+      "source": "golden_hour_lakeside_wilderness_camp.png"
+    },
+    "worldMapRiverWaterfallDay": {
+      "path": "backgrounds/world-map/world-map-river-waterfall-day.webp",
+      "role": "World map / daytime valley",
+      "width": 1448,
+      "height": 1086,
+      "format": "webp",
+      "source": "fantasy_valley_with_river_and_waterfall.png"
+    },
+    "worldMapTipiWaterfallDay": {
+      "path": "backgrounds/world-map/world-map-tipi-waterfall-day.webp",
+      "role": "World map / daytime valley with tipis",
+      "width": 1448,
+      "height": 1086,
+      "format": "webp",
+      "source": "vibrant_fantasy_valley_with_teepees_and_waterfalls.png"
+    },
+    "worldMapAuroraNight": {
+      "path": "backgrounds/world-map/world-map-aurora-night.webp",
+      "role": "World map / aurora night",
+      "width": 1672,
+      "height": 941,
+      "format": "webp",
+      "source": "enchanted_aurora_over_the_mountain_valley.png"
+    },
+    "levelSelectForestTrailNight": {
+      "path": "backgrounds/level-select/level-select-forest-trail-night.webp",
+      "role": "Level select / forest trail",
+      "width": 1448,
+      "height": 1086,
+      "format": "webp",
+      "source": "moonlit_forest_campsite_and_winding_trail.png"
+    },
+    "levelSelectLakesideTwilight": {
+      "path": "backgrounds/level-select/level-select-lakeside-twilight.webp",
+      "role": "Level select / twilight",
+      "width": 1448,
+      "height": 1086,
+      "format": "webp",
+      "source": "magical_lakeside_camp_at_twilight.png"
+    },
+    "quizForestClearing": {
+      "path": "backgrounds/quiz/quiz-forest-clearing.webp",
+      "role": "Quiz / dark woodland clearing",
+      "width": 1448,
+      "height": 1086,
+      "format": "webp",
+      "source": "enchanted_twilight_forest_clearing.png"
+    },
+    "quizTwilightLake": {
+      "path": "backgrounds/quiz/quiz-twilight-lake.webp",
+      "role": "Quiz / twilight lake",
+      "width": 1448,
+      "height": 1086,
+      "format": "webp",
+      "source": "twilight_lake_among_pines.png"
+    },
+    "wordleLakeDusk": {
+      "path": "backgrounds/wordle/wordle-lake-dusk.webp",
+      "role": "Wordle / dusk lake",
+      "width": 1448,
+      "height": 1086,
+      "format": "webp",
+      "source": "twilight_campfire_by_the_lake.png"
+    },
+    "wordleMoonlitLake": {
+      "path": "backgrounds/wordle/wordle-moonlit-lake.webp",
+      "role": "Wordle / moonlit lake",
+      "width": 1448,
+      "height": 1086,
+      "format": "webp",
+      "source": "moonlit_lakeside_wilderness_camp.png"
+    },
+    "completeStarryCampfire": {
+      "path": "backgrounds/level-complete/complete-starry-campfire.webp",
+      "role": "Level complete / night campfire",
+      "width": 1448,
+      "height": 1086,
+      "format": "webp",
+      "source": "starry_lakeside_campfire_vista.png"
+    },
+    "completeTwilightCampfire": {
+      "path": "backgrounds/level-complete/complete-twilight-campfire.webp",
+      "role": "Level complete / twilight",
+      "width": 1448,
+      "height": 1086,
+      "format": "webp",
+      "source": "twilight_lakeside_campfire_retreat.png"
+    },
+    "auroraForestSky": {
+      "path": "backgrounds/shared/aurora-forest-sky.webp",
+      "role": "Shared aurora forest sky",
+      "width": 1672,
+      "height": 941,
+      "format": "webp",
+      "source": "aurora_over_an_enchanted_forest.png"
+    }
+  },
+  "ui": {
+    "bannerWoodHangingLarge": {
+      "path": "ui/banners/banner-wood-hanging-large.png",
+      "role": "Large hanging wooden banner",
+      "width": 836,
+      "height": 257,
+      "format": "png",
+      "source": "fantasy_adventure_game_ui_sprite_sheet.png"
+    },
+    "bannerWoodHangingSmall": {
+      "path": "ui/banners/banner-wood-hanging-small.png",
+      "role": "Small hanging wooden banner",
+      "width": 453,
+      "height": 185,
+      "format": "png",
+      "source": "fantasy_adventure_game_ui_sprite_sheet.png"
+    },
+    "bannerWoodPlankSmall": {
+      "path": "ui/banners/banner-wood-plank-small.png",
+      "role": "Small wooden plank banner",
+      "width": 402,
+      "height": 103,
+      "format": "png",
+      "source": "fantasy_adventure_game_ui_sprite_sheet.png"
+    },
+    "buttonGreenPlayWide": {
+      "path": "ui/buttons/button-green-play-wide.png",
+      "role": "Green wooden play button",
+      "width": 504,
+      "height": 170,
+      "format": "png",
+      "source": "fantasy_adventure_game_ui_sprite_sheet.png"
+    },
+    "buttonGreenWide": {
+      "path": "ui/buttons/button-green-wide.png",
+      "role": "Green wooden button",
+      "width": 440,
+      "height": 153,
+      "format": "png",
+      "source": "fantasy_adventure_game_ui_sprite_sheet.png"
+    },
+    "buttonGoldWide": {
+      "path": "ui/buttons/button-gold-wide.png",
+      "role": "Gold wooden button",
+      "width": 432,
+      "height": 158,
+      "format": "png",
+      "source": "fantasy_adventure_game_ui_sprite_sheet.png"
+    },
+    "panelParchmentLarge": {
+      "path": "ui/panels/panel-parchment-large.png",
+      "role": "Large parchment panel",
+      "width": 670,
+      "height": 256,
+      "format": "png",
+      "source": "fantasy_adventure_game_ui_sprite_sheet.png"
+    },
+    "panelChallengeBeaver": {
+      "path": "ui/panels/panel-challenge-beaver.png",
+      "role": "Challenge panel with beaver",
+      "width": 720,
+      "height": 178,
+      "format": "png",
+      "source": "fantasy_adventure_game_ui_sprite_sheet.png"
+    },
+    "panelProgressStar": {
+      "path": "ui/panels/panel-progress-star.png",
+      "role": "Star/progress panel",
+      "width": 705,
+      "height": 125,
+      "format": "png",
+      "source": "fantasy_adventure_game_ui_sprite_sheet.png"
+    },
+    "cardWorldLandscape": {
+      "path": "ui/cards/card-world-landscape.png",
+      "role": "World/landscape card",
+      "width": 242,
+      "height": 239,
+      "format": "png",
+      "source": "fantasy_adventure_game_ui_sprite_sheet.png"
+    },
+    "bannerCurvedFeather": {
+      "path": "ui/banners/banner-curved-feather.png",
+      "role": "Curved banner with feather ornaments",
+      "width": 713,
+      "height": 250,
+      "format": "png",
+      "source": "fantasy_adventure_game_ui_sprite_sheet.png"
+    },
+    "panelTabLarge": {
+      "path": "ui/panels/panel-tab-large.png",
+      "role": "Large wooden tab panel",
+      "width": 413,
+      "height": 112,
+      "format": "png",
+      "source": "fantasy_adventure_game_ui_sprite_sheet.png"
+    },
+    "panelTabSmall": {
+      "path": "ui/panels/panel-tab-small.png",
+      "role": "Small wooden tab panel",
+      "width": 397,
+      "height": 118,
+      "format": "png",
+      "source": "fantasy_adventure_game_ui_sprite_sheet.png"
+    },
+    "cornerWoodTopLeft": {
+      "path": "ui/corners/corner-wood-top-left.png",
+      "role": "Wood UI corner",
+      "width": 128,
+      "height": 143,
+      "format": "png",
+      "source": "fantasy_adventure_game_ui_sprite_sheet.png"
+    },
+    "cornerWoodBottomLeft": {
+      "path": "ui/corners/corner-wood-bottom-left.png",
+      "role": "Wood UI corner",
+      "width": 124,
+      "height": 142,
+      "format": "png",
+      "source": "fantasy_adventure_game_ui_sprite_sheet.png"
+    },
+    "cornerWoodTopRight": {
+      "path": "ui/corners/corner-wood-top-right.png",
+      "role": "Wood UI corner",
+      "width": 142,
+      "height": 143,
+      "format": "png",
+      "source": "fantasy_adventure_game_ui_sprite_sheet.png"
+    },
+    "cornerWoodBottomRight": {
+      "path": "ui/corners/corner-wood-bottom-right.png",
+      "role": "Wood UI corner",
+      "width": 136,
+      "height": 143,
+      "format": "png",
+      "source": "fantasy_adventure_game_ui_sprite_sheet.png"
+    }
+  },
+  "icons": {
+    "menu": {
+      "path": "icons/navigation/icon-menu.png",
+      "role": "Menu button",
+      "width": 251,
+      "height": 248,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    },
+    "back": {
+      "path": "icons/navigation/icon-back.png",
+      "role": "Back button",
+      "width": 246,
+      "height": 248,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    },
+    "profile": {
+      "path": "icons/navigation/icon-profile.png",
+      "role": "Profile button",
+      "width": 239,
+      "height": 242,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    },
+    "speaker": {
+      "path": "icons/gameplay/icon-speaker.png",
+      "role": "Speaker / pronunciation",
+      "width": 245,
+      "height": 246,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    },
+    "map": {
+      "path": "icons/gameplay/icon-map.png",
+      "role": "World map",
+      "width": 271,
+      "height": 247,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    },
+    "book": {
+      "path": "icons/gameplay/icon-book.png",
+      "role": "Word collection / book",
+      "width": 288,
+      "height": 225,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    },
+    "target": {
+      "path": "icons/gameplay/icon-target.png",
+      "role": "Daily challenge / target",
+      "width": 251,
+      "height": 262,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    },
+    "lock-closed": {
+      "path": "icons/status/icon-lock-closed.png",
+      "role": "Locked state",
+      "width": 196,
+      "height": 255,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    },
+    "lock-open": {
+      "path": "icons/status/icon-lock-open.png",
+      "role": "Unlocked state",
+      "width": 219,
+      "height": 259,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    },
+    "play": {
+      "path": "icons/gameplay/icon-play.png",
+      "role": "Play",
+      "width": 264,
+      "height": 264,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    },
+    "replay": {
+      "path": "icons/gameplay/icon-replay.png",
+      "role": "Replay",
+      "width": 261,
+      "height": 253,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    },
+    "next": {
+      "path": "icons/navigation/icon-next.png",
+      "role": "Next / continue",
+      "width": 364,
+      "height": 216,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    },
+    "home": {
+      "path": "icons/navigation/icon-home.png",
+      "role": "Home",
+      "width": 318,
+      "height": 242,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    },
+    "settings": {
+      "path": "icons/navigation/icon-settings.png",
+      "role": "Settings",
+      "width": 262,
+      "height": 262,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    },
+    "heart-full": {
+      "path": "icons/status/icon-heart-full.png",
+      "role": "Full life / heart",
+      "width": 240,
+      "height": 206,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    },
+    "heart-empty": {
+      "path": "icons/status/icon-heart-empty.png",
+      "role": "Empty life / heart",
+      "width": 233,
+      "height": 204,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    },
+    "streak-fire": {
+      "path": "icons/status/icon-streak-fire.png",
+      "role": "Streak / fire",
+      "width": 202,
+      "height": 252,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    },
+    "feather-coin": {
+      "path": "icons/rewards/icon-feather-coin.png",
+      "role": "Feather reward coin",
+      "width": 230,
+      "height": 239,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    },
+    "star": {
+      "path": "icons/rewards/icon-star.png",
+      "role": "Reward star icon",
+      "width": 228,
+      "height": 230,
+      "format": "png",
+      "source": "ojibwe_style_fantasy_game_icon_atlas.png"
+    }
+  },
+  "rewards": {
+    "starGoldSingleGlow": {
+      "path": "rewards/stars/star-gold-single-glow.png",
+      "role": "Single glowing gold reward star",
+      "width": 1177,
+      "height": 1178,
+      "format": "png",
+      "source": "glossy_golden_game_reward_star.png"
+    },
+    "starGoldTripleVictory": {
+      "path": "rewards/stars/star-gold-triple-victory.png",
+      "role": "Three-star victory badge",
+      "width": 1335,
+      "height": 937,
+      "format": "png",
+      "source": "glossy_golden_three_star_victory_badge.png"
+    },
+    "starLockedSilver": {
+      "path": "rewards/stars/star-locked-silver.png",
+      "role": "Locked/inactive silver star",
+      "width": 1021,
+      "height": 981,
+      "format": "png",
+      "source": "glossy_icy_steel_star_badge.png"
+    },
+    "starFeatherVictoryEmblem": {
+      "path": "rewards/emblems/star-feather-victory-emblem.png",
+      "role": "Victory emblem with star and feathers",
+      "width": 1197,
+      "height": 770,
+      "format": "png",
+      "source": "golden_feathered_star_emblem.png"
+    },
+    "featherPairOrnamentA": {
+      "path": "rewards/feathers/feather-pair-ornament-a.png",
+      "role": "Decorative hanging feather pair",
+      "width": 703,
+      "height": 1196,
+      "format": "png",
+      "source": "polished_wooden_feather_charm.png"
+    },
+    "featherPairOrnamentB": {
+      "path": "rewards/feathers/feather-pair-ornament-b.png",
+      "role": "Decorative hanging feather pair variant",
+      "width": 774,
+      "height": 1199,
+      "format": "png",
+      "source": "wooden_feather_charm_ornament.png"
+    }
+  },
+  "decorations": {
+    "tipiCampClusterTwoFire": {
+      "path": "decorations/tipis/tipi-camp-cluster-two-fire.png",
+      "role": "Two tipis, trees and campfire cluster",
+      "width": 522,
+      "height": 465,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "tipiSingleTreeCluster": {
+      "path": "decorations/tipis/tipi-single-tree-cluster.png",
+      "role": "Single tipi with trees",
+      "width": 380,
+      "height": 417,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "canoeWaterEdge": {
+      "path": "decorations/canoes/canoe-water-edge.png",
+      "role": "Canoe at water edge",
+      "width": 336,
+      "height": 220,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "campfireLarge": {
+      "path": "decorations/campfires/campfire-large.png",
+      "role": "Large campfire",
+      "width": 248,
+      "height": 254,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "beaverFriendly": {
+      "path": "decorations/animals/beaver-friendly.png",
+      "role": "Friendly beaver mascot",
+      "width": 255,
+      "height": 247,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "eagleFlying": {
+      "path": "decorations/animals/eagle-flying.png",
+      "role": "Flying eagle",
+      "width": 299,
+      "height": 295,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "treeClusterA": {
+      "path": "decorations/trees/tree-cluster-a.png",
+      "role": "Pine tree cluster",
+      "width": 300,
+      "height": 325,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "treeClusterB": {
+      "path": "decorations/trees/tree-cluster-b.png",
+      "role": "Pine tree cluster variant",
+      "width": 267,
+      "height": 315,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "treeTallSingle": {
+      "path": "decorations/trees/tree-tall-single.png",
+      "role": "Tall pine tree",
+      "width": 169,
+      "height": 350,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "treeClusterSmall": {
+      "path": "decorations/trees/tree-cluster-small.png",
+      "role": "Small pine tree cluster",
+      "width": 210,
+      "height": 280,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "rockClusterLarge": {
+      "path": "decorations/rocks/rock-cluster-large.png",
+      "role": "Large mossy rock cluster",
+      "width": 270,
+      "height": 176,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "rockSmall": {
+      "path": "decorations/rocks/rock-small.png",
+      "role": "Small rock",
+      "width": 140,
+      "height": 170,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "rockClusterRight": {
+      "path": "decorations/rocks/rock-cluster-right.png",
+      "role": "Rock cluster variant",
+      "width": 211,
+      "height": 142,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "pawMarkerPair": {
+      "path": "decorations/markers/paw-marker-pair.png",
+      "role": "Pair of paw-print level markers",
+      "width": 330,
+      "height": 155,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "stoneTrailCurves": {
+      "path": "decorations/trails/stone-trail-curves.png",
+      "role": "Curved stepping-stone trail pieces",
+      "width": 450,
+      "height": 215,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "trailMarkerPaintedPost": {
+      "path": "decorations/markers/trail-marker-painted-post.png",
+      "role": "Painted trail marker post",
+      "width": 185,
+      "height": 242,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "signpostArrows": {
+      "path": "decorations/markers/signpost-arrows.png",
+      "role": "Wooden directional signpost",
+      "width": 213,
+      "height": 376,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "pondCattailsRocks": {
+      "path": "decorations/water/pond-cattails-rocks.png",
+      "role": "Pond edge with cattails, rocks and stump",
+      "width": 464,
+      "height": 183,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "shrubFlowerGroup": {
+      "path": "decorations/plants/shrub-flower-group.png",
+      "role": "Flowering shrub / plants",
+      "width": 255,
+      "height": 110,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "logShrub": {
+      "path": "decorations/plants/log-shrub.png",
+      "role": "Fallen log with ground plants",
+      "width": 215,
+      "height": 131,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "shrubSmall": {
+      "path": "decorations/plants/shrub-small.png",
+      "role": "Small ground shrub",
+      "width": 122,
+      "height": 137,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    },
+    "shrubMedium": {
+      "path": "decorations/plants/shrub-medium.png",
+      "role": "Medium shrub",
+      "width": 156,
+      "height": 147,
+      "format": "png",
+      "source": "cartoon_forest_adventure_asset_sheet.png"
+    }
+  },
+  "sourceSheets": {
+    "iconAtlas": {
+      "path": "source-sheets/ojibwe_style_fantasy_game_icon_atlas.png",
+      "role": "Original icon atlas preserved for reference"
+    },
+    "uiSheet": {
+      "path": "source-sheets/fantasy_adventure_game_ui_sprite_sheet.png",
+      "role": "Original UI sprite sheet preserved for reference"
+    },
+    "environmentSheet": {
+      "path": "source-sheets/cartoon_forest_adventure_asset_sheet.png",
+      "role": "Original environment asset sheet preserved for reference"
+    }
+  }
+}

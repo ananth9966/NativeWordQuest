@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 import GameTopBar from "./GameTopBar";
+import SceneBackground from "./SceneBackground";
+import { NWQ_ASSETS } from "../assets/assets";
 
 function uniqueByEnglish(words) {
   const seen = new Set();
@@ -102,6 +104,7 @@ export default function MultipleChoice({
 
   return (
     <main className="screen quiz-screen">
+      <SceneBackground src={NWQ_ASSETS.backgrounds.quiz.forestClearing} fit="cover">
       <GameTopBar
         title={`${word.worldShortName} · Step 2 of 2`}
         streak={player.streak}
@@ -166,6 +169,7 @@ export default function MultipleChoice({
           </section>
         )}
       </section>
+      </SceneBackground>
     </main>
   );
 }

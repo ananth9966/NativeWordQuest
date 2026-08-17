@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import GameTopBar from "./GameTopBar";
+import SceneBackground from "./SceneBackground";
+import { NWQ_ASSETS } from "../assets/assets";
 
 const KEY_ROWS = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
 
@@ -171,6 +173,7 @@ export default function WordleChallenge({
 
   return (
     <main className="screen wordle-screen">
+      <SceneBackground src={NWQ_ASSETS.backgrounds.wordle.lakeDusk} fit="cover">
       <GameTopBar
         title={`${word.worldShortName} · Step 1 of 2`}
         streak={player.streak}
@@ -236,6 +239,7 @@ export default function WordleChallenge({
 
         <div className="timer">Time {formatTime(elapsed)}</div>
       </section>
+      </SceneBackground>
     </main>
   );
 }

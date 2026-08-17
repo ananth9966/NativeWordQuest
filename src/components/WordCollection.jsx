@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import GameTopBar from "./GameTopBar";
+import AssetImage from "./AssetImage";
 import Stars from "./Stars";
+import { NWQ_ASSETS } from "../assets/assets";
 import { isWordComplete, starsForWord } from "../utils/gameData";
 
 export default function WordCollection({
@@ -77,7 +79,7 @@ export default function WordCollection({
                 <>
                   <h2>?????</h2>
                   <p>{word.categoryLabel}</p>
-                  <span className="collection-lock">🔒</span>
+                  <AssetImage src={NWQ_ASSETS.status.lockClosed} decorative className="collection-lock-img" />
                 </>
               )}
             </article>
