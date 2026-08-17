@@ -32,7 +32,8 @@ export default function HomeScreen({
             <strong>WORD QUEST</strong>
           </h1>
 
-          <p>Odaminodaa! Let's Play!</p>
+          <p>Odaminodaa!</p>
+          <p>Let's Play!</p>
         </section>
 
         <button className="btn-gold continue-button" onClick={onContinue}>
@@ -62,7 +63,7 @@ export default function HomeScreen({
         </section>
 
         <p className="demo-note">
-          TSV-driven prototype · Progress is saved in this browser
+          Development prototype
         </p>
       </SceneBackground>
     </main>
