@@ -1570,3 +1570,27 @@ button:focus-visible {
     font-size: 1.3rem;
   }
 }
+
+.quest-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+
+  font-size: 0.9rem;
+  color: #4b3826;
+  text-align: center;
+}
+
+.quest-progress span {
+  font-weight: 600;
+}
+
+.quest-progress strong {
+  font-weight: 800;
+}
+
+.quest-progress-divider {
+  opacity: 0.55;
+}
