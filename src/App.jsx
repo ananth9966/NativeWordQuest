@@ -15,14 +15,52 @@ import {
 } from "./utils/gameData";
 
 const STORAGE_KEY = "odaminodaa-player-v3";
-const DEFAULT_PLAYER = { streak: 5, completed: {} };
+
+const DEFAULT_PLAYER = {
+  streak: 5,
+  completed: {},
+  hasStarted: false
+};
+
+function createDefaultPlayer() {
+  return {
+    ...DEFAULT_PLAYER,
+    completed: {}
+  };
+}
 
 function loadPlayer() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? { ...DEFAULT_PLAYER, ...JSON.parse(saved) } : DEFAULT_PLAYER;
+
+    if (!saved) {
+      return createDefaultPlayer();
+    }
+
+    const parsed = JSON.parse(saved);
+    const completed = parsed?.completed || {};
+
+    /*
+     * Backward compatibility:
+     * Older versions of the game did not have hasStarted and created
+     * localStorage immediately when the page opened.
+     *
+     * If an older save contains completed words, it is genuine progress.
+     * If it contains no completed words, treat it as a first-time player.
+     */
+    const hasStarted =
+      typeof parsed?.hasStarted === "boolean"
+        ? parsed.hasStarted
+        : Object.keys(completed).length > 0;
+
+    return {
+      ...DEFAULT_PLAYER,
+      ...parsed,
+      completed,
+      hasStarted
+    };
   } catch {
-    return DEFAULT_PLAYER;
+    return createDefaultPlayer();
   }
 }
 
@@ -50,8 +88,21 @@ export default function App() {
       .catch((error) => setLoadingError(error.message));
   }, []);
 
+  /*
+   * Save only after the player has actually started playing.
+   * This prevents a first-time page visit from being mistaken for
+   * existing game progress.
+   */
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(player));
+    try {
+      if (player.hasStarted) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(player));
+      } else {
+        localStorage.removeItem(STORAGE_KEY);
+      }
+    } catch {
+      // The game can still run if browser storage is unavailable.
+    }
   }, [player]);
 
   const worlds = useMemo(() => buildWorlds(words), [words]);
@@ -80,12 +131,24 @@ export default function App() {
     nextPlayable?.word ||
     words[0];
 
+  function markGameStarted() {
+    setPlayer((previous) =>
+      previous.hasStarted
+        ? previous
+        : {
+            ...previous,
+            hasStarted: true
+          }
+    );
+  }
+
   function openWorld(worldId) {
     setSelectedWorldId(Number(worldId));
     setScreen("levels");
   }
 
   function startWord(wordId, worldId) {
+    markGameStarted();
     setSelectedWordId(wordId);
     setSelectedWorldId(Number(worldId));
     setPendingWordleResult(null);
@@ -95,6 +158,7 @@ export default function App() {
   function continueJourney() {
     if (!nextPlayable) return;
 
+    markGameStarted();
     setSelectedWorldId(nextPlayable.world.id);
     setSelectedWordId(nextPlayable.word.id);
     setPendingWordleResult(null);
@@ -153,6 +217,7 @@ export default function App() {
     const dayNumber = Math.floor(Date.now() / 86400000);
     const word = words[dayNumber % words.length];
 
+    markGameStarted();
     setSelectedWorldId(word.worldId);
     setSelectedWordId(word.id);
     setPendingWordleResult(null);
@@ -160,11 +225,17 @@ export default function App() {
   }
 
   function resetProgress() {
-    setPlayer({ ...DEFAULT_PLAYER });
+    setPlayer(createDefaultPlayer());
     setSelectedWordId(null);
     setSelectedWorldId(null);
     setPendingWordleResult(null);
-    localStorage.removeItem(STORAGE_KEY);
+
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      // Ignore storage errors so Reset still returns to the home screen.
+    }
+
     setScreen("home");
   }
 
@@ -173,7 +244,9 @@ export default function App() {
       <main className="loading-screen">
         <h1>Odaminodaa</h1>
         <p>{loadingError}</p>
-        <p>Make sure <code>public/data/words.tsv</code> exists and uses tabs.</p>
+        <p>
+          Make sure <code>public/data/words.tsv</code> exists and uses tabs.
+        </p>
       </main>
     );
   }
@@ -194,6 +267,7 @@ export default function App() {
           player={player}
           stars={totalStars}
           nextPlayable={nextPlayable}
+          hasSavedProgress={player.hasStarted}
           onContinue={continueJourney}
           onWorldMap={() => setScreen("world-map")}
           onDaily={startDaily}

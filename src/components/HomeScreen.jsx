@@ -7,6 +7,7 @@ export default function HomeScreen({
   player,
   stars,
   nextPlayable,
+  hasSavedProgress,
   onContinue,
   onWorldMap,
   onDaily,
@@ -15,10 +16,27 @@ export default function HomeScreen({
 }) {
   const nextWorld = nextPlayable?.world?.shortName || "Word Quest";
 
+  const questTitle = hasSavedProgress
+    ? "CONTINUE QUEST"
+    : "START QUEST";
+
+  const questSubtitle = hasSavedProgress
+    ? nextPlayable
+      ? `${nextWorld} · Next word`
+      : "Quest complete"
+    : nextPlayable
+      ? `${nextWorld} · First word`
+      : "Quest complete";
+
   return (
     <main className="screen home-screen">
       <SceneBackground src={NWQ_ASSETS.backgrounds.home.day} fit="cover">
-        <GameTopBar title="" streak={player.streak} stars={stars} onMenu={onReset} />
+        <GameTopBar
+          title=""
+          streak={player.streak}
+          stars={stars}
+          onMenu={onReset}
+        />
 
         <section className="hero-title">
           <AssetImage
@@ -38,26 +56,39 @@ export default function HomeScreen({
 
         <button className="btn-gold continue-button" onClick={onContinue}>
           <span>
-            <strong>CONTINUE QUEST</strong>
-            <small>{nextPlayable ? `${nextWorld} · Next word` : "Quest complete"}</small>
+            <strong>{questTitle}</strong>
+            <small>{questSubtitle}</small>
           </span>
+
           <b className="continue-arrow">➜</b>
         </button>
 
         <section className="home-menu" aria-label="Main game menu">
           <button className="game-card" onClick={onWorldMap}>
-            <AssetImage src={NWQ_ASSETS.gameplay.map} decorative className="game-card-icon-img" />
+            <AssetImage
+              src={NWQ_ASSETS.gameplay.map}
+              decorative
+              className="game-card-icon-img"
+            />
             <strong>WORLD MAP</strong>
           </button>
 
           <button className="game-card" onClick={onDaily}>
-            <AssetImage src={NWQ_ASSETS.gameplay.target} decorative className="game-card-icon-img" />
+            <AssetImage
+              src={NWQ_ASSETS.gameplay.target}
+              decorative
+              className="game-card-icon-img"
+            />
             <strong>DAILY CHALLENGE</strong>
             <small>NOONGOM</small>
           </button>
 
           <button className="game-card" onClick={onCollection}>
-            <AssetImage src={NWQ_ASSETS.gameplay.book} decorative className="game-card-icon-img" />
+            <AssetImage
+              src={NWQ_ASSETS.gameplay.book}
+              decorative
+              className="game-card-icon-img"
+            />
             <strong>WORD COLLECTION</strong>
           </button>
         </section>
