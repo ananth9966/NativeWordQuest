@@ -155,14 +155,21 @@ export default function App() {
     setScreen("wordle");
   }
 
-  function continueJourney() {
-    if (!nextPlayable) return;
+ function continueJourney() {
+  if (!player.hasStarted) {
+    setScreen("world-map");
+    return;
+  }
 
-    markGameStarted();
-    setSelectedWorldId(nextPlayable.world.id);
-    setSelectedWordId(nextPlayable.word.id);
-    setPendingWordleResult(null);
-    setScreen("wordle");
+  if (!nextPlayable) {
+    setScreen("world-map");
+    return;
+  }
+
+  setSelectedWorldId(nextPlayable.world.id);
+  setSelectedWordId(nextPlayable.word.id);
+  setPendingWordleResult(null);
+  setScreen("levels");
   }
 
   function finishWordle(result) {
