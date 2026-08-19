@@ -15,22 +15,18 @@ export default function HomeScreen({
   onReset
 }) {
   const nextWorld = nextPlayable?.world?.shortName || "Word Quest";
+  const nextLevel = nextPlayable?.word?.level || 1;
 
   const questTitle = hasSavedProgress
     ? "CONTINUE QUEST"
-    : "START QUEST";
-
-  const questSubtitle = hasSavedProgress
-    ? nextPlayable
-      ? `${nextWorld} · Next word`
-      : "Quest complete"
-    : nextPlayable
-      ? `${nextWorld} · First word`
-      : "Quest complete";
+    : "BEGIN YOUR QUEST";
 
   return (
     <main className="screen home-screen">
-      <SceneBackground src={NWQ_ASSETS.backgrounds.home.day} fit="cover">
+      <SceneBackground
+        src={NWQ_ASSETS.backgrounds.home.day}
+        fit="cover"
+      >
         <GameTopBar
           title=""
           streak={player.streak}
@@ -54,41 +50,72 @@ export default function HomeScreen({
           <p>Let's Play!</p>
         </section>
 
-        <button className="btn-gold continue-button" onClick={onContinue}>
-          <span>
-            <strong>{questTitle}</strong>
-            <small>{questSubtitle}</small>
-          </span>
+        <button
+          className="btn-gold continue-button"
+          onClick={onContinue}
+        >
+          <strong>{questTitle}</strong>
 
           <b className="continue-arrow">➜</b>
         </button>
 
-        <section className="home-menu" aria-label="Main game menu">
-          <button className="game-card" onClick={onWorldMap}>
+        {nextPlayable && (
+          <div className="quest-progress">
+            <span>World : {nextWorld}</span>
+
+            <span className="quest-progress-divider">•</span>
+
+            <strong>Level : {nextLevel}</strong>
+          </div>
+        )}
+
+        {!nextPlayable && hasSavedProgress && (
+          <div className="quest-progress">
+            <strong>Quest Complete!</strong>
+          </div>
+        )}
+
+        <section
+          className="home-menu"
+          aria-label="Main game menu"
+        >
+          <button
+            className="game-card"
+            onClick={onWorldMap}
+          >
             <AssetImage
               src={NWQ_ASSETS.gameplay.map}
               decorative
               className="game-card-icon-img"
             />
+
             <strong>WORLD MAP</strong>
           </button>
 
-          <button className="game-card" onClick={onDaily}>
+          <button
+            className="game-card"
+            onClick={onDaily}
+          >
             <AssetImage
               src={NWQ_ASSETS.gameplay.target}
               decorative
               className="game-card-icon-img"
             />
+
             <strong>DAILY CHALLENGE</strong>
             <small>NOONGOM</small>
           </button>
 
-          <button className="game-card" onClick={onCollection}>
+          <button
+            className="game-card"
+            onClick={onCollection}
+          >
             <AssetImage
               src={NWQ_ASSETS.gameplay.book}
               decorative
               className="game-card-icon-img"
             />
+
             <strong>WORD COLLECTION</strong>
           </button>
         </section>
