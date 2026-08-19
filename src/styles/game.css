@@ -245,10 +245,12 @@ button:focus-visible {
   width: min(590px, 84vw);
   min-height: 96px;
   margin: clamp(1.5rem, 4vh, 2.4rem) auto 0;
-  display: grid;
-  grid-template-columns: 1fr 54px;
+
+  display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: center;
+  gap: 20px;
+
   padding: 0.9rem 1.6rem;
   transition: transform 160ms ease, filter 160ms ease;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.32);
@@ -259,25 +261,17 @@ button:focus-visible {
   filter: brightness(1.08);
 }
 
-.continue-button strong,
-.continue-button small {
-  display: block;
-  text-align: left;
-}
-
 .continue-button strong {
+  display: block;
+  text-align: center;
   font-size: clamp(1.15rem, 3vw, 1.65rem);
 }
 
-.continue-button small {
-  margin-top: 0.3rem;
-  font-size: 0.95rem;
-  font-weight: 700;
-}
-
 .continue-arrow {
+  flex: 0 0 auto;
   color: #6b3f1a;
   font-size: 2.4rem;
+  line-height: 1;
   animation: arrow-bounce 1.2s ease-in-out infinite;
 }
 
@@ -568,7 +562,7 @@ button:focus-visible {
 }
 
 /* =========================================================
-   Level select — curved forest trail
+   Level select â€” curved forest trail
    ========================================================= */
 
 .world-title {
