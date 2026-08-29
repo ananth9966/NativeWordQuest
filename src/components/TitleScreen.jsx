@@ -18,8 +18,6 @@ export default function TitleScreen({ onPlay }) {
               <span>NATIVE</span>
               <strong>WORD QUEST</strong>
             </h1>
-            <p>Odaminodaa!</p>
-              <p>Let's Play!</p>
           </section>
 
           <button className="btn-gold title-play-button" onClick={onPlay}>
