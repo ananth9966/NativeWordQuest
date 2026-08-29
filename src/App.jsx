@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import TitleScreen from "./components/TitleScreen";
 import HomeScreen from "./components/HomeScreen";
 import WorldMap from "./components/WorldMap";
 import LevelSelect from "./components/LevelSelect";
@@ -65,7 +66,7 @@ function loadPlayer() {
 }
 
 export default function App() {
-  const [screen, setScreen] = useState("home");
+  const [screen, setScreen] = useState("title");
   const [words, setWords] = useState([]);
   const [player, setPlayer] = useState(loadPlayer);
   const [selectedWorldId, setSelectedWorldId] = useState(null);
@@ -244,6 +245,10 @@ export default function App() {
     }
 
     setScreen("home");
+  }
+
+  if (screen === "title") {
+    return <TitleScreen onPlay={() => setScreen("home")} />;
   }
 
   if (loadingError) {
