@@ -3,11 +3,11 @@ import {
     useMemo,
     useState
 } from "react";
-import GameTopBar from "./GameTopBar";
-import SceneBackground from "./SceneBackground";
+import GameTopBar from "../GameTopBar";
+import SceneBackground from "../SceneBackground";
 import {
     NWQ_ASSETS
-} from "../assets/assets";
+} from "../../assets/assets";
 
 const KEY_ROWS = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
 const DISABLED_KEYS = new Set(["Q", "R", "U", "F", "L", "X", "V"]);

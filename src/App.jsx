@@ -1,15 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
 import TitleScreen from "./components/TitleScreen";
-import HomeScreen from "./components/HomeScreen";
-import WorldMap from "./components/WorldMap";
-import LevelSelect from "./components/LevelSelect";
-import MultipleChoice from "./components/MultipleChoice";
-import WordleChallenge from "./components/WordleChallenge";
-import LevelComplete from "./components/LevelComplete";
-import WordCollection from "./components/WordCollection";
-import FlashCards from "./components/FlashCards";
-import MathMode from "./components/MathMode";
-import Dictionary from "./components/Dictionary";
+import ComingSoonScreen from "./components/ComingSoonScreen";
+import OjibweHomeScreen from "./components/ojibwe/OjibweHomeScreen";
+import WorldMap from "./components/ojibwe/WorldMap";
+import LevelSelect from "./components/ojibwe/LevelSelect";
+import MultipleChoice from "./components/ojibwe/MultipleChoice";
+import WordleChallenge from "./components/ojibwe/WordleChallenge";
+import LevelComplete from "./components/ojibwe/LevelComplete";
+import WordCollection from "./components/ojibwe/WordCollection";
+import FlashCards from "./components/ojibwe/FlashCards";
+import MathMode from "./components/ojibwe/MathMode";
+import Dictionary from "./components/ojibwe/Dictionary";
 import { loadTSV } from "./utils/loadTSV";
 import {
   buildWorlds,
@@ -70,6 +71,7 @@ function loadPlayer() {
 
 export default function App() {
   const [screen, setScreen] = useState("title");
+  const [language, setLanguage] = useState("ojibwe");
   const [words, setWords] = useState([]);
   const [player, setPlayer] = useState(loadPlayer);
   const [selectedWorldId, setSelectedWorldId] = useState(null);
@@ -279,7 +281,14 @@ export default function App() {
   }
 
   if (screen === "title") {
-    return <TitleScreen onPlay={() => setScreen("home")} />;
+    return (
+      <TitleScreen
+        onPlay={(selectedLanguage) => {
+          setLanguage(selectedLanguage);
+          setScreen("home");
+        }}
+      />
+    );
   }
 
   if (loadingError) {
@@ -305,8 +314,8 @@ export default function App() {
 
   return (
     <div className="game-shell">
-      {screen === "home" && (
-        <HomeScreen
+      {screen === "home" && language === "ojibwe" && (
+        <OjibweHomeScreen
           player={player}
           stars={totalStars}
           nextPlayable={nextPlayable}
@@ -321,6 +330,13 @@ export default function App() {
           onReset={resetProgress}
           onNavigate={navigateTo}
           activeScreen={screen}
+        />
+      )}
+
+      {screen === "home" && language !== "ojibwe" && (
+        <ComingSoonScreen
+          language={language}
+          onBack={() => setScreen("title")}
         />
       )}
 

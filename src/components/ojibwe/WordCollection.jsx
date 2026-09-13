@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
-import GameTopBar from "./GameTopBar";
-import AssetImage from "./AssetImage";
-import Stars from "./Stars";
-import { NWQ_ASSETS } from "../assets/assets";
-import { isWordComplete, starsForWord } from "../utils/gameData";
+import GameTopBar from "../GameTopBar";
+import AssetImage from "../AssetImage";
+import Stars from "../Stars";
+import { NWQ_ASSETS } from "../../assets/assets";
+import { isWordComplete, starsForWord } from "../../utils/gameData";
 
 export default function WordCollection({
   words,

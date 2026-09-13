@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
-import GameTopBar from "./GameTopBar";
-import SceneBackground from "./SceneBackground";
-import { NWQ_ASSETS } from "../assets/assets";
+import GameTopBar from "../GameTopBar";
+import SceneBackground from "../SceneBackground";
+import { NWQ_ASSETS } from "../../assets/assets";
 
 const NUMBER_WORD_TO_DIGIT = {
   one: "1",

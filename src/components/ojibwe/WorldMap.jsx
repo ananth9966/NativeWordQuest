@@ -1,9 +1,9 @@
-import GameTopBar from "./GameTopBar";
-import SceneBackground from "./SceneBackground";
-import AssetImage from "./AssetImage";
-import Stars from "./Stars";
-import { NWQ_ASSETS } from "../assets/assets";
-import { getWorldProgress, starsForWord } from "../utils/gameData";
+import GameTopBar from "../GameTopBar";
+import SceneBackground from "../SceneBackground";
+import AssetImage from "../AssetImage";
+import Stars from "../Stars";
+import { NWQ_ASSETS } from "../../assets/assets";
+import { getWorldProgress, starsForWord } from "../../utils/gameData";
 
 const WORLD_ICONS = {
   1: "🐻",

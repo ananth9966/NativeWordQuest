@@ -316,6 +316,31 @@ button:focus-visible {
   background: #f6edcd;
 }
 
+.coming-soon-panel {
+  width: min(560px, 88vw);
+  padding: 1.6rem 2rem;
+  border-radius: 18px;
+  text-align: center;
+  background-color: transparent;
+  background-image: url("/NativeWordQuest/assets/ui/panels/panel-parchment-large.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: #3d2b1e;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.38);
+}
+
+.coming-soon-panel strong {
+  display: block;
+  font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+}
+
+.coming-soon-panel small {
+  display: block;
+  margin-top: 0.5rem;
+  font-weight: 700;
+  color: #6b4c2c;
+}
+
 .title-play-button {
   min-width: 240px;
   padding: 1.1rem 3.2rem;

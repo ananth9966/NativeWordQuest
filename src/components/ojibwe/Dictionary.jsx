@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import GameTopBar from "./GameTopBar";
+import GameTopBar from "../GameTopBar";
 
 export default function Dictionary({
   words,

@@ -1,9 +1,9 @@
-import GameTopBar from "./GameTopBar";
-import SceneBackground from "./SceneBackground";
-import AssetImage from "./AssetImage";
-import { NWQ_ASSETS } from "../assets/assets";
+import GameTopBar from "../GameTopBar";
+import SceneBackground from "../SceneBackground";
+import AssetImage from "../AssetImage";
+import { NWQ_ASSETS } from "../../assets/assets";
 
-export default function HomeScreen({
+export default function OjibweHomeScreen({
   player,
   stars,
   nextPlayable,
@@ -49,7 +49,7 @@ export default function HomeScreen({
           />
 
           <h1>
-            <span>NATIVE</span>
+            <span>OJIBWE</span>
             <strong>WORD QUEST</strong>
           </h1>
 

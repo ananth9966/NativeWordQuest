@@ -1,7 +1,7 @@
-import Stars from "./Stars";
-import SceneBackground from "./SceneBackground";
-import AssetImage from "./AssetImage";
-import { NWQ_ASSETS } from "../assets/assets";
+import Stars from "../Stars";
+import SceneBackground from "../SceneBackground";
+import AssetImage from "../AssetImage";
+import { NWQ_ASSETS } from "../../assets/assets";
 
 function formatTime(seconds = 0) {
   const minutes = Math.floor(seconds / 60).toString().padStart(2, "0");

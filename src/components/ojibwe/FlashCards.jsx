@@ -1,7 +1,7 @@
 import { useState } from "react";
-import GameTopBar from "./GameTopBar";
-import SceneBackground from "./SceneBackground";
-import { NWQ_ASSETS } from "../assets/assets";
+import GameTopBar from "../GameTopBar";
+import SceneBackground from "../SceneBackground";
+import { NWQ_ASSETS } from "../../assets/assets";
 
 export default function FlashCards({
   words,

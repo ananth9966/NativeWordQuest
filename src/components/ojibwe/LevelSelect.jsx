@@ -1,14 +1,14 @@
-import GameTopBar from "./GameTopBar";
-import SceneBackground from "./SceneBackground";
-import AssetImage from "./AssetImage";
-import Stars from "./Stars";
-import { NWQ_ASSETS } from "../assets/assets";
+import GameTopBar from "../GameTopBar";
+import SceneBackground from "../SceneBackground";
+import AssetImage from "../AssetImage";
+import Stars from "../Stars";
+import { NWQ_ASSETS } from "../../assets/assets";
 import {
   isLessonComplete,
   isLessonUnlocked,
   isWordUnlocked,
   starsForWord
-} from "../utils/gameData";
+} from "../../utils/gameData";
 
 const STEP_SPACING = 150;
 const START_Y = 95;
