@@ -20,6 +20,15 @@ export default function TitleScreen({ onPlay }) {
             </h1>
           </section>
 
+          <div className="language-select">
+            <label htmlFor="language">Choose a Language:</label>
+            <select id="language" name="Language">
+              <option value="ojibwe">Ojibwe</option>
+              <option value="michif">Michif</option>
+              <option value="chacotaw">Chacotaw</option>
+            </select>
+          </div>
+
           <button className="btn-gold title-play-button" onClick={onPlay}>
             <strong>START</strong>
           </button>

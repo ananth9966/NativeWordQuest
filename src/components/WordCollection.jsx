@@ -10,7 +10,10 @@ export default function WordCollection({
   worlds,
   player,
   stars,
-  onBack
+  onBack,
+  onNavigate,
+  onReset,
+  activeScreen
 }) {
   const [query, setQuery] = useState("");
 
@@ -38,6 +41,9 @@ export default function WordCollection({
         streak={player.streak}
         stars={stars}
         onBack={onBack}
+        onNavigate={onNavigate}
+        onReset={onReset}
+        activeScreen={activeScreen}
       />
 
       <section className="collection-title">

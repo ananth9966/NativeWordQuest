@@ -7,6 +7,9 @@ import MultipleChoice from "./components/MultipleChoice";
 import WordleChallenge from "./components/WordleChallenge";
 import LevelComplete from "./components/LevelComplete";
 import WordCollection from "./components/WordCollection";
+import FlashCards from "./components/FlashCards";
+import MathMode from "./components/MathMode";
+import Dictionary from "./components/Dictionary";
 import { loadTSV } from "./utils/loadTSV";
 import {
   buildWorlds,
@@ -232,6 +235,34 @@ export default function App() {
     setScreen("wordle");
   }
 
+  function navigateTo(key) {
+    switch (key) {
+      case "home":
+        setScreen("home");
+        return;
+      case "world-map":
+        setScreen("world-map");
+        return;
+      case "daily":
+        startDaily();
+        return;
+      case "collection":
+        setScreen("collection");
+        return;
+      case "flashcards":
+        setScreen("flashcards");
+        return;
+      case "mathmode":
+        setScreen("mathmode");
+        return;
+      case "dictionary":
+        setScreen("dictionary");
+        return;
+      default:
+        return;
+    }
+  }
+
   function resetProgress() {
     setPlayer(createDefaultPlayer());
     setSelectedWordId(null);
@@ -284,7 +315,12 @@ export default function App() {
           onWorldMap={() => setScreen("world-map")}
           onDaily={startDaily}
           onCollection={() => setScreen("collection")}
+          onFlashCards={() => setScreen("flashcards")}
+          onMathMode={() => setScreen("mathmode")}
+          onDictionary={() => setScreen("dictionary")}
           onReset={resetProgress}
+          onNavigate={navigateTo}
+          activeScreen={screen}
         />
       )}
 
@@ -295,6 +331,9 @@ export default function App() {
           worlds={worlds}
           onBack={() => setScreen("home")}
           onWorld={openWorld}
+          onNavigate={navigateTo}
+          onReset={resetProgress}
+          activeScreen={screen}
         />
       )}
 
@@ -305,6 +344,9 @@ export default function App() {
           world={selectedWorld}
           onBack={() => setScreen("world-map")}
           onPlay={(wordId) => startWord(wordId, selectedWorld.id)}
+          onNavigate={navigateTo}
+          onReset={resetProgress}
+          activeScreen={screen}
         />
       )}
 
@@ -315,6 +357,45 @@ export default function App() {
           player={player}
           stars={totalStars}
           onBack={() => setScreen("home")}
+          onNavigate={navigateTo}
+          onReset={resetProgress}
+          activeScreen={screen}
+        />
+      )}
+
+      {screen === "flashcards" && (
+        <FlashCards
+          words={words}
+          player={player}
+          stars={totalStars}
+          onBack={() => setScreen("home")}
+          onNavigate={navigateTo}
+          onReset={resetProgress}
+          activeScreen={screen}
+        />
+      )}
+
+      {screen === "mathmode" && (
+        <MathMode
+          words={words}
+          player={player}
+          stars={totalStars}
+          onBack={() => setScreen("home")}
+          onNavigate={navigateTo}
+          onReset={resetProgress}
+          activeScreen={screen}
+        />
+      )}
+
+      {screen === "dictionary" && (
+        <Dictionary
+          words={words}
+          player={player}
+          stars={totalStars}
+          onBack={() => setScreen("home")}
+          onNavigate={navigateTo}
+          onReset={resetProgress}
+          activeScreen={screen}
         />
       )}
 
@@ -328,6 +409,9 @@ export default function App() {
             setScreen("levels");
           }}
           onComplete={finishWordle}
+          onNavigate={navigateTo}
+          onReset={resetProgress}
+          activeScreen={screen}
         />
       )}
 
@@ -339,6 +423,9 @@ export default function App() {
           stars={totalStars}
           onBack={() => setScreen("wordle")}
           onComplete={finishRecognition}
+          onNavigate={navigateTo}
+          onReset={resetProgress}
+          activeScreen={screen}
         />
       )}
 

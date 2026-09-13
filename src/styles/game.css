@@ -185,6 +185,60 @@ button:focus-visible {
   object-fit: contain;
 }
 
+.nav-menu {
+  position: relative;
+}
+
+.nav-menu-dropdown {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 10px);
+  right: 0;
+  width: max(220px, 100%);
+  padding: 0.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #0c2532;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.nav-menu-item {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #f4e9c3;
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+.nav-menu-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-menu-item-active {
+  background: rgba(248, 216, 90, 0.16);
+  color: #ffd35a;
+}
+
+.nav-menu-divider {
+  margin: 0.4rem 0.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.nav-menu-item-danger {
+  color: #ff9d8a;
+}
+
+.nav-menu-item-danger:hover {
+  background: rgba(163, 58, 48, 0.28);
+}
+
 /* Home */
 
 .hero-title {
@@ -210,6 +264,56 @@ button:focus-visible {
 
 .title-screen-content .hero-title {
   padding-top: 0;
+}
+
+.language-select {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.language-select label {
+  color: #f9f0cc;
+  font-weight: 900;
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.55);
+}
+
+.language-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  min-width: 220px;
+  padding: 0.75rem 2.6rem 0.75rem 1.3rem;
+  border: 2px solid rgba(231, 214, 165, 0.4);
+  border-radius: 999px;
+  outline: none;
+  background-color: rgba(3, 29, 40, 0.72);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23f6edcd' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='5 8 10 13 15 8'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 0.9rem;
+  color: #f6edcd;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+  transition: transform 150ms ease, filter 150ms ease;
+}
+
+.language-select select:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.12);
+}
+
+.language-select select:focus-visible {
+  outline: 3px solid #f8d85a;
+  outline-offset: 2px;
+}
+
+.language-select option {
+  color: #241c10;
+  background: #f6edcd;
 }
 
 .title-play-button {
@@ -314,6 +418,7 @@ button:focus-visible {
   position: relative;
   z-index: 4;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: clamp(0.6rem, 2vw, 1.2rem);
   width: min(650px, 94vw);
@@ -360,6 +465,11 @@ button:focus-visible {
   width: clamp(52px, 9vw, 74px);
   height: clamp(52px, 9vw, 74px);
   object-fit: contain;
+}
+
+.game-card-icon-emoji {
+  font-size: clamp(2.6rem, 6vw, 3.6rem);
+  line-height: 1;
 }
 
 .demo-note {
@@ -999,6 +1109,106 @@ button:focus-visible {
   color: #1f3a10;
   font-size: 1.08rem;
   font-weight: 900;
+}
+
+/* =========================================================
+   Flash cards
+   ========================================================= */
+
+.flashcards-content {
+  position: relative;
+  z-index: 5;
+  width: min(640px, 92vw);
+  margin: 1.2rem auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+  padding-bottom: 2rem;
+}
+
+.flashcards-progress {
+  margin: 0;
+  color: #f3e8c3;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.flashcard {
+  position: relative;
+  perspective: 1400px;
+  width: min(520px, 88vw);
+  height: 300px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 450ms ease;
+  transform-style: preserve-3d;
+}
+
+.flashcard-flipped .flashcard-inner {
+  transform: rotateY(180deg);
+}
+
+.flashcard-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1.5rem;
+  border-radius: 18px;
+  background-color: transparent;
+  background-image: url("/NativeWordQuest/assets/ui/panels/panel-parchment-large.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: #3d2b1e;
+  backface-visibility: hidden;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+}
+
+.flashcard-back {
+  transform: rotateY(180deg);
+}
+
+.flashcard-face strong {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.flashcard-face small {
+  color: #6b4c2c;
+  font-weight: 800;
+}
+
+.flashcards-controls {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.flashcards-controls button {
+  min-width: 130px;
+  padding: 0.9rem 1.3rem;
+  font-weight: 900;
+}
+
+.dictionary-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #dfe8e3;
+  padding: 2rem 0;
 }
 
 /* =========================================================

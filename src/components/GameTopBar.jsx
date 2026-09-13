@@ -1,4 +1,5 @@
 import AssetImage from "./AssetImage";
+import NavMenu from "./NavMenu";
 import { NWQ_ASSETS } from "../assets/assets";
 
 export default function GameTopBar({
@@ -6,21 +7,27 @@ export default function GameTopBar({
   streak = 0,
   stars = 0,
   onBack,
-  onMenu
+  onNavigate,
+  onReset,
+  activeScreen
 }) {
   return (
     <header className="topbar">
-      <button
-        className="round-icon-button"
-        onClick={onBack || onMenu}
-        aria-label={onBack ? "Go back" : "Open menu"}
-      >
-        <AssetImage
-          src={onBack ? NWQ_ASSETS.navigation.back : NWQ_ASSETS.navigation.menu}
-          decorative
-          className="topbar-icon-img"
-        />
-      </button>
+      {onBack ? (
+        <button
+          className="round-icon-button"
+          onClick={onBack}
+          aria-label="Go back"
+        >
+          <AssetImage
+            src={NWQ_ASSETS.navigation.back}
+            decorative
+            className="topbar-icon-img"
+          />
+        </button>
+      ) : (
+        <span />
+      )}
 
       <div className="topbar-title">{title}</div>
 
@@ -33,6 +40,15 @@ export default function GameTopBar({
           <AssetImage src={NWQ_ASSETS.rewardIcons.star} decorative className="pill-icon-img" />
           {stars}
         </span>
+
+        {onNavigate && (
+          <NavMenu
+            onNavigate={onNavigate}
+            onReset={onReset}
+            activeScreen={activeScreen}
+          />
+        )}
+
         <span className="avatar" aria-hidden="true">
           <AssetImage src={NWQ_ASSETS.navigation.profile} decorative className="topbar-icon-img" />
         </span>

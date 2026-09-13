@@ -48,7 +48,10 @@ export default function WordleChallenge({
     player,
     stars,
     onBack,
-    onComplete
+    onComplete,
+    onNavigate,
+    onReset,
+    activeScreen
 }) {
     const answer = word.ojibwe.toUpperCase();
     const [guesses, setGuesses] = useState([]);
@@ -199,6 +202,9 @@ export default function WordleChallenge({
         streak={player.streak}
         stars={stars}
         onBack={onBack}
+        onNavigate={onNavigate}
+        onReset={onReset}
+        activeScreen={activeScreen}
       />
 
       <section className="wordle-content">

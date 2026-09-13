@@ -85,7 +85,10 @@ export default function MultipleChoice({
   player,
   stars,
   onBack,
-  onComplete
+  onComplete,
+  onNavigate,
+  onReset,
+  activeScreen
 }) {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [attempts, setAttempts] = useState(0);
@@ -110,6 +113,9 @@ export default function MultipleChoice({
         streak={player.streak}
         stars={stars}
         onBack={onBack}
+        onNavigate={onNavigate}
+        onReset={onReset}
+        activeScreen={activeScreen}
       />
 
       <section className="quiz-content">

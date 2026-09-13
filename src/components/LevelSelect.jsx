@@ -50,7 +50,10 @@ export default function LevelSelect({
   stars,
   world,
   onBack,
-  onPlay
+  onPlay,
+  onNavigate,
+  onReset,
+  activeScreen
 }) {
   return (
     <main className="screen level-screen forest-level-screen">
@@ -60,6 +63,9 @@ export default function LevelSelect({
           streak={player.streak}
           stars={stars}
           onBack={onBack}
+          onNavigate={onNavigate}
+          onReset={onReset}
+          activeScreen={activeScreen}
         />
 
         <section className="world-title">

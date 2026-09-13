@@ -12,7 +12,12 @@ export default function HomeScreen({
   onWorldMap,
   onDaily,
   onCollection,
-  onReset
+  onFlashCards,
+  onMathMode,
+  onDictionary,
+  onReset,
+  onNavigate,
+  activeScreen
 }) {
   const nextWorld = nextPlayable?.world?.shortName || "Word Quest";
   const nextLevel = nextPlayable?.word?.level || 1;
@@ -31,7 +36,9 @@ export default function HomeScreen({
           title=""
           streak={player.streak}
           stars={stars}
-          onMenu={onReset}
+          onNavigate={onNavigate}
+          onReset={onReset}
+          activeScreen={activeScreen}
         />
 
         <section className="hero-title">
@@ -117,6 +124,33 @@ export default function HomeScreen({
             />
 
             <strong>WORD COLLECTION</strong>
+          </button>
+
+          <button
+            className="game-card"
+            onClick={onFlashCards}
+          >
+            <span className="game-card-icon-emoji" aria-hidden="true">🗂️</span>
+
+            <strong>FLASH CARDS</strong>
+          </button>
+
+          <button
+            className="game-card"
+            onClick={onMathMode}
+          >
+            <span className="game-card-icon-emoji" aria-hidden="true">🔢</span>
+
+            <strong>MATH MODE</strong>
+          </button>
+
+          <button
+            className="game-card"
+            onClick={onDictionary}
+          >
+            <span className="game-card-icon-emoji" aria-hidden="true">📖</span>
+
+            <strong>DICTIONARY</strong>
           </button>
         </section>
 

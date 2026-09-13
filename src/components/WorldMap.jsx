@@ -62,7 +62,10 @@ export default function WorldMap({
   stars,
   worlds,
   onBack,
-  onWorld
+  onWorld,
+  onNavigate,
+  onReset,
+  activeScreen
 }) {
   const points = worlds.map((_, index) => trailPoint(index));
   const path = buildTrailPath(points);
@@ -76,6 +79,9 @@ export default function WorldMap({
           streak={player.streak}
           stars={stars}
           onBack={onBack}
+          onNavigate={onNavigate}
+          onReset={onReset}
+          activeScreen={activeScreen}
         />
 
         <div className="banner-plank world-map-banner">
