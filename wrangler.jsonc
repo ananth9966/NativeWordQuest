@@ -1,0 +1,14 @@
+
+{
+  "name": "nativewordquest",
+  "compatibility_date": "2026-10-19",
+  "assets": {
+    "directory": "./dist"
+  },
+  "routes": [
+    {
+      "pattern": "wordquest.nativewordle.com",
+      "custom_domain": true
+    }
+  ]
+}
