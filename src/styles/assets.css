@@ -3,6 +3,7 @@
 .nwq-scene {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
   overflow: hidden;
   background: #071d2b;
   isolation: isolate;
@@ -37,6 +38,7 @@
   position: relative;
   z-index: 1;
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* Reusable transparent asset image */

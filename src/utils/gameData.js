@@ -182,18 +182,20 @@ export function getNextPlayableWord(player, worlds) {
           isWordUnlocked(player, world, lessonIndex, wordIndex) &&
           !isWordComplete(player, word.id)
         ) {
-          return { word, world, lessonIndex, wordIndex };
+          return {
+            word,
+            world,
+            lessonIndex,
+            wordIndex,
+            levelNumber: lessonIndex * LESSON_SIZE + wordIndex + 1
+          };
         }
       }
     }
   }
 
-  const firstWorld = worlds[0];
-  const firstWord = firstWorld?.lessons?.[0]?.words?.[0];
-
-  return firstWord
-    ? { word: firstWord, world: firstWorld, lessonIndex: 0, wordIndex: 0 }
-    : null;
+  // Every unlocked word is complete: the quest is finished.
+  return null;
 }
 
 export function getWorldProgress(player, world) {

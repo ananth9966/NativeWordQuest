@@ -77,6 +77,9 @@ export default function App() {
   const [selectedWorldId, setSelectedWorldId] = useState(null);
   const [selectedWordId, setSelectedWordId] = useState(null);
   const [pendingWordleResult, setPendingWordleResult] = useState(null);
+  // Bumped on every new attempt so the Wordle board always starts fresh,
+  // even when jumping to another word from inside a level.
+  const [playId, setPlayId] = useState(0);
   const [lastResult, setLastResult] = useState({
     guesses: 0,
     stars: 0,
@@ -110,6 +113,11 @@ export default function App() {
       // The game can still run if browser storage is unavailable.
     }
   }, [player]);
+
+  // Every new screen starts at the top, even if the last one was scrolled.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [screen]);
 
   const worlds = useMemo(() => buildWorlds(words), [words]);
 
@@ -154,6 +162,7 @@ export default function App() {
   }
 
   function startWord(wordId, worldId) {
+    setPlayId((value) => value + 1);
     markGameStarted();
     setSelectedWordId(wordId);
     setSelectedWorldId(Number(worldId));
@@ -220,6 +229,7 @@ export default function App() {
   }
 
   function replayCurrentWord() {
+    setPlayId((value) => value + 1);
     setPendingWordleResult(null);
     setScreen("wordle");
   }
@@ -231,6 +241,7 @@ export default function App() {
     const word = words[dayNumber % words.length];
 
     markGameStarted();
+    setPlayId((value) => value + 1);
     setSelectedWorldId(word.worldId);
     setSelectedWordId(word.id);
     setPendingWordleResult(null);
@@ -415,6 +426,7 @@ export default function App() {
 
       {screen === "wordle" && selectedWord && (
         <WordleChallenge
+          key={`${selectedWord.id}-${playId}`}
           word={selectedWord}
           player={player}
           stars={totalStars}
@@ -431,6 +443,7 @@ export default function App() {
 
       {screen === "quiz" && selectedWord && (
         <MultipleChoice
+          key={`${selectedWord.id}-${playId}`}
           word={selectedWord}
           words={words}
           player={player}

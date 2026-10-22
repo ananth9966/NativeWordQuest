@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import GameTopBar from "../GameTopBar";
 import SceneBackground from "../SceneBackground";
 import { NWQ_ASSETS } from "../../assets/assets";
@@ -67,6 +67,13 @@ export default function MathMode({
   const [round, setRound] = useState(0);
   const [selected, setSelected] = useState(null);
   const [score, setScore] = useState({ correct: 0, attempted: 0 });
+  const panelRef = useRef(null);
+
+  useEffect(() => {
+    if (selected !== null) {
+      panelRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  }, [selected]);
 
   const question = useMemo(
     () => (numberWords.length >= 4 ? buildQuestion(numberWords) : null),
@@ -140,7 +147,7 @@ export default function MathMode({
             </div>
 
             {selected !== null && (
-              <section className="correct-panel">
+              <section className="correct-panel" ref={panelRef}>
                 <div>
                   <strong>
                     {question.choices[selected].id === question.answer.id

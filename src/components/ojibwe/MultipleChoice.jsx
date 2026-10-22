@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import GameTopBar from "../GameTopBar";
 import SceneBackground from "../SceneBackground";
 import { NWQ_ASSETS } from "../../assets/assets";
@@ -94,9 +94,17 @@ export default function MultipleChoice({
   const [attempts, setAttempts] = useState(0);
 
   const choices = useMemo(() => buildChoices(word, words), [word, words]);
+  const panelRef = useRef(null);
 
   const correct =
     selectedIndex !== null && Boolean(choices[selectedIndex]?.correct);
+
+  // On small screens the Complete button can land below the fold.
+  useEffect(() => {
+    if (correct) {
+      panelRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  }, [correct]);
 
   function choose(index) {
     if (correct) return;
@@ -158,7 +166,7 @@ export default function MultipleChoice({
         )}
 
         {correct && (
-          <section className="correct-panel">
+          <section className="correct-panel" ref={panelRef}>
             <div>
               <strong>Meaning confirmed!</strong>
               <span>{word.ojibwe.toUpperCase()} = {word.english}</span>

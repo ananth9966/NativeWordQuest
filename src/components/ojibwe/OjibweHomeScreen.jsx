@@ -20,7 +20,7 @@ export default function OjibweHomeScreen({
   activeScreen
 }) {
   const nextWorld = nextPlayable?.world?.shortName || "Word Quest";
-  const nextLevel = nextPlayable?.word?.level || 1;
+  const nextLevel = nextPlayable?.levelNumber || 1;
 
   const questTitle = hasSavedProgress
     ? "CONTINUE QUEST"

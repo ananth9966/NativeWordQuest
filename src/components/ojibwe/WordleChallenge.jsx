@@ -1,6 +1,7 @@
 import {
     useEffect,
     useMemo,
+    useRef,
     useState
 } from "react";
 import GameTopBar from "../GameTopBar";
@@ -62,16 +63,24 @@ export default function WordleChallenge({
     const [startedAt] = useState(() => Date.now());
     const [elapsed, setElapsed] = useState(0);
 
+    const completeTimer = useRef(null);
+
     const solved = guesses.some((guess) => guess === answer);
     const failed = guesses.length >= 6 && !solved;
+    const finished = solved || failed;
 
     useEffect(() => {
+        if (finished) return undefined;
+
         const timer = window.setInterval(() => {
             setElapsed((Date.now() - startedAt) / 1000);
         }, 500);
 
         return () => window.clearInterval(timer);
-    }, [startedAt]);
+    }, [startedAt, finished]);
+
+    // Leaving the screen mid-transition must not jump to the quiz later.
+    useEffect(() => () => window.clearTimeout(completeTimer.current), []);
 
     const keyStates = useMemo(() => {
         const states = {};
@@ -132,12 +141,15 @@ export default function WordleChallenge({
 
             setMessage("Correct! Now confirm the meaning.");
 
-            window.setTimeout(() => {
+            const finalElapsed = (Date.now() - startedAt) / 1000;
+            setElapsed(finalElapsed);
+
+            completeTimer.current = window.setTimeout(() => {
                 onComplete({
                     guesses: guessCount,
                     stars: earnedStars,
                     score,
-                    elapsed
+                    elapsed: finalElapsed
                 });
             }, 850);
 
@@ -149,12 +161,15 @@ export default function WordleChallenge({
                 "Recall attempt complete. Continue to recognition practice."
             );
 
-            window.setTimeout(() => {
+            const finalElapsed = (Date.now() - startedAt) / 1000;
+            setElapsed(finalElapsed);
+
+            completeTimer.current = window.setTimeout(() => {
                 onComplete({
                     guesses: 6,
                     stars: 1,
                     score: 100,
-                    elapsed
+                    elapsed: finalElapsed
                 });
             }, 1100);
         } else {

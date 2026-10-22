@@ -21,6 +21,7 @@ body,
 
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
 }
 
@@ -40,6 +41,7 @@ button:focus-visible {
 .game-shell,
 .screen {
   min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
 }
 
@@ -52,6 +54,7 @@ button:focus-visible {
 
 .loading-screen {
   min-height: 100vh;
+  min-height: 100dvh;
   display: grid;
   place-content: center;
   text-align: center;
@@ -254,6 +257,7 @@ button:focus-visible {
   position: relative;
   z-index: 2;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -602,6 +606,7 @@ button:focus-visible {
 .world-path-screen,
 .scalable-map-screen {
   min-height: 100vh;
+  min-height: 100dvh;
   overflow-y: auto;
   padding-bottom: 3rem;
 }
@@ -1981,4 +1986,270 @@ button:focus-visible {
   opacity: 0.55;
   cursor: not-allowed;
   box-shadow: none;
+}
+/* =========================================================
+   Device-adaptive layout
+   Sizes the game to whatever screen it opens on: phones
+   (portrait + landscape), tablets, laptops, and projectors.
+   ========================================================= */
+
+button {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Wordle: always exactly one screen tall. The letter board takes
+   whatever height is left after the hint and keyboard, so the
+   keyboard is never pushed below the fold. */
+
+.wordle-screen .nwq-scene__content {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.wordle-screen .topbar {
+  flex: 0 0 auto;
+}
+
+.wordle-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wordle-content > * {
+  flex: 0 0 auto;
+}
+
+.wordle-grid {
+  --gap: 6px;
+  flex: 1 1 0;
+  width: 100%;
+  max-width: none;
+  min-height: 150px;
+  margin: 0.4rem auto;
+  container-type: size;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--gap);
+}
+
+.wordle-row {
+  gap: var(--gap);
+  margin: 0;
+}
+
+.wordle-tile {
+  --tile-size: min(
+    62px,
+    calc((100cqw - (var(--answer-length) - 1) * var(--gap)) / var(--answer-length)),
+    calc((100cqh - 5 * var(--gap)) / 6)
+  );
+  min-width: 0;
+  min-height: 0;
+  font-size: calc(var(--tile-size) * 0.5);
+}
+
+/* Keys shrink evenly so a 10-key row fits even a 320px phone */
+.keyboard button {
+  flex: 0 1 52px;
+  min-width: 0;
+  height: clamp(30px, 5dvh, 48px);
+  padding: 0;
+}
+
+.keyboard-row,
+.keyboard-actions {
+  margin: 0.25rem 0;
+}
+
+/* Give the letter board priority over secondary text on shorter screens */
+@media (max-height: 900px) {
+  .wordle-hint {
+    display: none;
+  }
+
+  .wordle-content .learning-step-label {
+    margin: 0.2rem auto 0.3rem;
+    padding: 0.3rem 0.75rem;
+  }
+
+  .wordle-content h1 {
+    margin: 0.2rem 0;
+  }
+
+  .recall-hint {
+    margin: 0.3rem auto;
+    padding: 0.4rem 1.2rem;
+  }
+
+  .timer {
+    margin-top: 0.25rem;
+  }
+}
+
+@media (max-height: 680px) {
+  .wordle-content .learning-step-label {
+    display: none;
+  }
+}
+
+.correct-panel {
+  scroll-margin-bottom: 1rem;
+}
+
+.keyboard .wide-key {
+  flex: 0 1 130px;
+  min-width: 0;
+}
+
+/* Phones held sideways: board on the left, keyboard on the right */
+@media (orientation: landscape) and (max-height: 520px) {
+  .wordle-content {
+    width: min(1000px, 96vw);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "hint message"
+      "grid keyboard"
+      "grid timer";
+    column-gap: 1.5rem;
+    align-items: center;
+    padding-bottom: 0.5rem;
+  }
+
+  .wordle-content .learning-step-label,
+  .wordle-content h1,
+  .wordle-hint {
+    display: none;
+  }
+
+  .recall-hint {
+    grid-area: hint;
+    margin: 0.2rem auto;
+  }
+
+  .wordle-grid {
+    grid-area: grid;
+    align-self: stretch;
+    height: 100%;
+    min-height: 120px;
+    margin: 0;
+  }
+
+  .wordle-message {
+    grid-area: message;
+  }
+
+  .keyboard {
+    grid-area: keyboard;
+    width: 100%;
+    margin: 0;
+  }
+
+  .keyboard button {
+    height: clamp(30px, 10dvh, 44px);
+  }
+
+  .timer {
+    grid-area: timer;
+    margin: 0;
+  }
+}
+
+/* Home: title scales with screen height as well as width */
+.hero-title h1 span {
+  font-size: clamp(2.6rem, min(8vw, 10vh), 6.6rem);
+}
+
+.hero-title h1 strong {
+  font-size: clamp(1.8rem, min(5.5vw, 7vh), 4.5rem);
+}
+
+/* Laptops, desktops, projectors: all six tiles in one row */
+@media (min-width: 1000px) {
+  .home-menu {
+    width: min(1100px, 94vw);
+    flex-wrap: nowrap;
+  }
+
+  .game-card {
+    width: auto;
+    flex: 1 1 0;
+    min-height: 150px;
+  }
+}
+
+/* Shorter screens (most laptops): tighten the home screen */
+@media (max-height: 820px) {
+  .hero-title p {
+    margin-top: 0.4rem;
+  }
+
+  .continue-button {
+    min-height: 78px;
+    margin-top: 1rem;
+  }
+
+  .home-menu {
+    margin-top: 1.2rem;
+  }
+}
+
+/* Level complete: score panel stays inside its container on narrow phones */
+.score-details {
+  width: 100%;
+  max-width: 760px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 650px) {
+  .score-details {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Very narrow phones: keep the top bar title to two lines */
+@media (max-width: 360px) {
+  .topbar {
+    gap: 0.5rem;
+  }
+
+  .topbar-title {
+    font-size: 0.8rem;
+  }
+}
+
+/* Phones held sideways: tiles in one compact row */
+@media (orientation: landscape) and (max-height: 520px) and (min-width: 640px) {
+  .home-menu {
+    width: min(1000px, 96vw);
+    flex-wrap: nowrap;
+  }
+
+  .game-card {
+    width: auto;
+    flex: 1 1 0;
+    min-height: 110px;
+    padding: 0.6rem 0.3rem;
+  }
+
+  .game-card-icon-img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .game-card-icon-emoji {
+    font-size: 2.2rem;
+  }
+
+  .continue-button {
+    min-height: 64px;
+  }
 }
