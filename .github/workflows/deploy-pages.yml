@@ -32,7 +32,7 @@ jobs:
         run: npm install --no-audit --no-fund
 
       - name: Build React application
-        run: npm run build
+        run: npm run build -- --base=/NativeWordQuest/
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
