@@ -7,7 +7,7 @@ import LevelSelect from "./components/ojibwe/LevelSelect";
 import MultipleChoice from "./components/ojibwe/MultipleChoice";
 import WordleChallenge from "./components/ojibwe/WordleChallenge";
 import LevelComplete from "./components/ojibwe/LevelComplete";
-import WordCollection from "./components/ojibwe/WordCollection";
+import Sentences from "./components/ojibwe/Sentences";
 import FlashCards from "./components/ojibwe/FlashCards";
 import MathMode from "./components/ojibwe/MathMode";
 import Dictionary from "./components/ojibwe/Dictionary";
@@ -248,8 +248,8 @@ export default function App() {
       case "daily":
         startDaily();
         return;
-      case "collection":
-        setScreen("collection");
+      case "sentences":
+        setScreen("sentences");
         return;
       case "flashcards":
         setScreen("flashcards");
@@ -323,7 +323,7 @@ export default function App() {
           onContinue={continueJourney}
           onWorldMap={() => setScreen("world-map")}
           onDaily={startDaily}
-          onCollection={() => setScreen("collection")}
+          onSentences={() => setScreen("sentences")}
           onFlashCards={() => setScreen("flashcards")}
           onMathMode={() => setScreen("mathmode")}
           onDictionary={() => setScreen("dictionary")}
@@ -366,10 +366,8 @@ export default function App() {
         />
       )}
 
-      {screen === "collection" && (
-        <WordCollection
-          words={words}
-          worlds={worlds}
+      {screen === "sentences" && (
+        <Sentences
           player={player}
           stars={totalStars}
           onBack={() => setScreen("home")}

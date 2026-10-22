@@ -11,7 +11,7 @@ export default function OjibweHomeScreen({
   onContinue,
   onWorldMap,
   onDaily,
-  onCollection,
+  onSentences,
   onFlashCards,
   onMathMode,
   onDictionary,
@@ -115,7 +115,7 @@ export default function OjibweHomeScreen({
 
           <button
             className="game-card"
-            onClick={onCollection}
+            onClick={onSentences}
           >
             <AssetImage
               src={NWQ_ASSETS.gameplay.book}
@@ -123,7 +123,7 @@ export default function OjibweHomeScreen({
               className="game-card-icon-img"
             />
 
-            <strong>WORD COLLECTION</strong>
+            <strong>SENTENCES</strong>
           </button>
 
           <button

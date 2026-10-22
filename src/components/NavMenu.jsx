@@ -6,7 +6,7 @@ const NAV_ITEMS = [
   { key: "home", label: "Home" },
   { key: "world-map", label: "World Map" },
   { key: "daily", label: "Daily Challenge" },
-  { key: "collection", label: "Word Collection" },
+  { key: "sentences", label: "Sentences" },
   { key: "flashcards", label: "Flash Cards" },
   { key: "mathmode", label: "Math Mode" },
   { key: "dictionary", label: "Dictionary" }
